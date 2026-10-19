@@ -49,16 +49,23 @@ class LocalWorker:
                 raise ValueError('job identity mismatch')
             if job['output_dir'] != 'artifacts/' + job['step_id']:
                 raise ValueError('output must be the registered step directory')
-            # Registered native backends are intentionally absent until T09-T11 verification.
-            if job['tool'] != 'mock.echo' or job['tool_version'] != VERSION or job['implementation_kind'] != 'mock' or run['mode'] != 'mock':
-                raise ValueError('no verified local handler registered')
+            if run['mode'] == 'real':
+                from .native import REGISTRY, configuration, source_path
+                if job['tool'] not in REGISTRY or job['implementation_kind'] != 'native' or job['tool_version'] != REGISTRY[job['tool']][1]:
+                    raise ValueError('no verified native handler')
+                configuration(self.root, plan)
+                source_path(job, manifest, row['input_root'])
+            elif job['tool'] != 'mock.echo' or job['tool_version'] != VERSION or job['implementation_kind'] != 'mock':
+                raise ValueError('no verified mock handler')
             return within(self.root, 'runs/' + job['run_id'])
         finally:
             engine.store.close()
 
     @staticmethod
     def initial_result(job):
-        return dict(schema_revision=VERSION, job_id=job['job_id'], run_id=job['run_id'], step_id=job['step_id'], status='queued', software={'name': 'MOCK ONLY', 'version': VERSION}, implementation_kind=job['implementation_kind'], effective_parameters=job['parameters'], input_manifest_hash=job['input_manifest_hash'], outputs=[], checks=[], warnings=['Process protocol validation only; no native software processing'], error=None)
+        from .native import REGISTRY
+        software = REGISTRY[job['tool']][:2] if job['tool'] in REGISTRY else ('MOCK ONLY', VERSION)
+        return dict(schema_revision=VERSION, job_id=job['job_id'], run_id=job['run_id'], step_id=job['step_id'], status='queued', software={'name': software[0], 'version': software[1]}, implementation_kind=job['implementation_kind'], effective_parameters=job['parameters'], input_manifest_hash=job['input_manifest_hash'], outputs=[], checks=[], warnings=['Fixed-case verification only; no classification accuracy claim'], error=None)
 
     def submit(self, job):
         validate('job', job)
@@ -107,13 +114,15 @@ class LocalWorker:
             self.db.rollback()
             raise
 
-    def finish(self, job_id, status, error=None, outputs=None):
+    def finish(self, job_id, status, error=None, outputs=None, release=True):
         with self.db:
             result = self.status(job_id)
-            result.update(status=status, error=error, outputs=outputs or [], checks=[{'check_id': 'mock-nonempty', 'passed': True}] if status == 'succeeded' else [])
+            check = 'mock-nonempty' if result['implementation_kind'] == 'mock' else 'native-readback'
+            result.update(status=status, error=error, outputs=outputs or [], checks=[{'check_id': check, 'passed': True}] if status == 'succeeded' else [])
             validate('result', result)
             self.db.execute('UPDATE jobs SET result=?,heartbeat=? WHERE id=?', (canonical(result), now(), job_id))
-            self.db.execute('DELETE FROM locks WHERE owner=?', (job_id,))
+            if release:
+                self.db.execute('DELETE FROM locks WHERE owner=?', (job_id,))
 
     def execute(self, job_id):
         self.db.execute('BEGIN IMMEDIATE')
@@ -124,7 +133,8 @@ class LocalWorker:
         job = json.loads(row['body'])
         try:
             run_root = self.authorize(job)
-            for resource in ('software:mock', 'project:' + job['project_id']):
+            software = job['tool'].split('.')[0] if job['implementation_kind'] == 'native' else 'mock'
+            for resource in ('software:' + software, 'project:' + job['project_id']):
                 self.db.execute('INSERT INTO locks VALUES(?,?,?,?)', (resource, job_id, os.getpid(), now()))
             result = json.loads(row['result']); result['status'] = 'running'
             self.db.execute('UPDATE jobs SET result=?,pid=?,heartbeat=? WHERE id=?', (canonical(result), os.getpid(), now(), job_id))
@@ -134,6 +144,10 @@ class LocalWorker:
             self.finish(job_id, 'failed', {'code': 'PREFLIGHT_OR_LOCK_FAILED', 'type': type(exc).__name__})
             return
         try:
+            if job['implementation_kind'] == 'native':
+                from .native_process import execute_native
+                execute_native(self, job, run_root)
+                return
             started = time.monotonic()
             # Small cooperative execution window also permits cancellation tests.
             while time.monotonic() - started < 0.2:
@@ -155,6 +169,9 @@ class LocalWorker:
 
 
 def main():
+    # JSON-RPC is UTF-8 regardless of the Windows console code page.
+    sys.stdin.reconfigure(encoding='utf-8')
+    sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', required=True)
     parser.add_argument('--execute')

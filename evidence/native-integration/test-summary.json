@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-19",
+  "tests_run": 76,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "skip_reason": "Windows symbolic link creation permission",
+  "utf8_protocol_followup": "12 local-worker tests passed after explicit stream UTF-8 fix",
+  "mcp_http_regression": "handshake, discovery, submit, reconnect/status, duplicate submission and terminal cancel passed",
+  "restored_project": {
+    "project_reopened": true,
+    "raster_layer_count": 1,
+    "broken_layers": 0,
+    "all_data_sources_within_restored_root": true
+  },
+  "scope": "fixed native integration, file integrity, project migration, unit/subprocess regression; no formal classification or independent scientific acceptance"
+}

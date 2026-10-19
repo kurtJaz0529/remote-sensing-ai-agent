@@ -2,7 +2,7 @@
 
 Windows 本地遥感实验 Agent：通过 DeepSeek/GPT 规划任务，调用本机 ENVI、MATLAB 和 ArcGIS Pro，保存可追溯的处理结果、真实截图、工程/复现包及报告。
 
-**当前状态：已导入云端 Codex 的 `0.1.0.dev1` 核心开发成果，正在本地集成。三软件真实接入、完整报告与真实实验闭环尚待验证。**
+**当前状态：基于云端 `0.1.0.dev1`，本地集成预览为 `0.1.0.dev2`。三软件固定案例已通过MCP与统一worker完成真实处理验证；完整分类实验、截图、报告与独立验收尚未完成。后续软件交互只使用MCP，见 [MCP接入约定](docs/MCP_ONLY.md)。**
 
 本仓库由本地 Codex 与 Antigravity 持续协作，云端 Codex 后续承接补充开发或独立评审。欢迎其他贡献者通过 Fork / Pull Request 提交代码和文件；仓库写权限由所有者按 GitHub 账号授予。
 

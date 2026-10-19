@@ -46,6 +46,22 @@ class LocalWorkerTests(unittest.TestCase):
         self.assertEqual(client.submit(job)['status'], 'succeeded')
         self.assertEqual(self.worker.db.execute('SELECT count(*) FROM jobs').fetchone()[0], 1)
 
+    def test_chinese_plan_in_non_utf8_child(self):
+        self.plan['revision'] = 2
+        self.plan['objective'] = '中文计划与用户要求'
+        self.plan['method_plan'][0]['parameters']['message'] = '中文参数与成果'
+        row, _, manifest = self.engine._plan(self.plan['task_id'], 1)
+        self.engine.save_plan(self.plan, manifest, row['input_root'])
+        approval = self.engine.approve(self.plan['task_id'], 2, 'test-fixture')
+        self.run = self.engine.create_run(self.plan['task_id'], 2, approval, 'mock')
+        client = JsonWorker([sys.executable, '-X', 'utf8=0', '-m', 'orchestrator.local_worker', '--root', str(self.worker.root)])
+        self.assertEqual(self.engine.execute(self.run, client)['state'], 'Paused')
+        job = json.loads(self.engine.store.db.execute('SELECT body FROM steps WHERE run=?', (self.run,)).fetchone()[0])
+        deadline = time.monotonic() + 15
+        while client.status(job['job_id'])['status'] in ('queued', 'running') and time.monotonic() < deadline:
+            time.sleep(.1)
+        self.assertEqual(self.engine.execute(self.run, client)['state'], 'Completed')
+
     def test_changed_confirmation_rejected(self):
         job = self.dispatch_without_process()
         self.worker.db.execute('DELETE FROM jobs'); self.worker.db.commit()

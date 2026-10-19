@@ -1,6 +1,6 @@
 {
   "project": "AI遥感本地Agent",
-  "version": "0.1.0.dev1",
+  "version": "0.1.0.dev2",
   "spec_revision": "v1.1",
   "schema_revision": "0.1.0",
   "scope": "cloud_core_import_and_local_integration_preview",

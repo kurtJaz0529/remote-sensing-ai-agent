@@ -1,5 +1,9 @@
 # 三成员交接
 
+用户最新限定：只用MCP，禁止Computer Use。后续遵循 [MCP入口与进程生命周期](MCP_ONLY.md)，不再尝试桌面自动化；旧窗口探测记录保留为失败历史。
+
+最新上交见 [统一worker真实集成与恢复](NATIVE_INTEGRATION_20261019.md)：三软件经统一worker实际Completed，19文件恢复及迁移工程重开通过；T16真实窗口当前不可取证，完整分类/报告/独立验收没有完成。旧批次说明保留历史，不替代此处最新边界。
+
 最新本地批次见 [T08 进程与三软件验证](LOCAL_WORKER.md)。独立进程协议已通过故障测试；三软件最小直接处理与重读有真实证据。真实后端尚未绑定统一 worker，不自签整体完成；继续 T08 handler/环境隔离与 T16 截图，再按依赖进入 T24。此前 T01/T02 批次保留在 [前置记录](LOCAL_FOUNDATION_20261019.md)。
 
 先读README、COLLABORATION、COVERAGE、WORKER_PROTOCOL，再看contracts/、examples/与specs/原文快照。Notion任务汇总继续更新同一编号；根据用户2026-10-19的新要求，代码及公共文件在GitHub协作。本地Codex与Antigravity继续开发，云端Codex后续承接补充工作。源码已导入本仓库，跨环境不依赖云端工作区路径。

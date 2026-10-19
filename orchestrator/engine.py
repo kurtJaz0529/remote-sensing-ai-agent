@@ -109,7 +109,7 @@ class Engine:
         self._validate_tools(plan,run["mode"])
         check_inputs(row["input_root"],manifest)
         run_root = self.store.root/"runs"/run["id"]
-        if fingerprint(json.loads((run_root/"contract"/"plan.json").read_text())) != row["hash"]:
+        if fingerprint(json.loads((run_root/"contract"/"plan.json").read_text(encoding="utf-8"))) != row["hash"]:
             raise ValueError("frozen plan changed")
         return plan, manifest, run_root
 

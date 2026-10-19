@@ -1,0 +1,173 @@
+{
+  "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+  "state": "Completed",
+  "plan_sha256": "4d60a347d40a1d0c6f7f2eb18016b67eb7a2231da9bc3bd43d9f4756e14ceeeb",
+  "input_manifest_hash": "5a43bc134a58bab5292b2b4e44e71952ff4f2278996461c9785371abd8931016",
+  "originals_unchanged": true,
+  "steps": [
+    {
+      "step_id": "S1",
+      "job_id": "JOB-9853ee0f17e446fb380c553327663201",
+      "state": "succeeded",
+      "software": {
+        "name": "ENVI",
+        "version": "5.6"
+      },
+      "checks": [
+        {
+          "check_id": "native-readback",
+          "passed": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "ART-ba3f2fe5b723cae07478dfda",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/subset.dat",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "7e009601e9e7c4eecad9eab1c0c0717d566a4d96e1461b93a73d6f959dcfc620",
+          "size": 1536,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-99cb8fc8e111732dfa08516b",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/subset.hdr",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "d2ea3d4531b07079952a993e432b3322900c8290f17e5ed36c4c9677db1af9aa",
+          "size": 530,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-599b0274948dc5af76beb64e",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/summary.json",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "ee82601ea9256a3c7c5d1f09f6115306a79b4201f4cdc8122ed055e67a9da9f5",
+          "size": 169,
+          "step_id": "S1",
+          "verified": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "step_id": "S2",
+      "job_id": "JOB-cabd8e7455e43ad0fb9f179e27e8334e",
+      "state": "succeeded",
+      "software": {
+        "name": "ArcGIS Pro",
+        "version": "3.6"
+      },
+      "checks": [
+        {
+          "check_id": "native-readback",
+          "passed": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "ART-bb1b06d14e9c4a7f32ab0a1b",
+          "kind": "data",
+          "relative_path": "artifacts/S2/native/copy.tfw",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "d8fb3fc806533e9a8d79cc9a1bb34e0f0fd365a40ca2ce0ae81e68211ffa8b40",
+          "size": 79,
+          "step_id": "S2",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-d2bf4c65698e8dea2866f1c0",
+          "kind": "data",
+          "relative_path": "artifacts/S2/native/copy.tif",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "aa36e1c9b43cc5384a3003facd708c61b80bc931d49947e7ef5aba76fdad9923",
+          "size": 1069311,
+          "step_id": "S2",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-5881124bb3213926cea88b42",
+          "kind": "data",
+          "relative_path": "artifacts/S2/native/copy.tif.aux.xml",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "2b85a8a04630572c77cf94d8c1ff334ce1715a5345b04a3c6f9e11548496592d",
+          "size": 7991,
+          "step_id": "S2",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-52b016baa3b230cfadd7280c",
+          "kind": "data",
+          "relative_path": "artifacts/S2/native/copy.tif.xml",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "c9df6c718f86053990364c5207fd214ae8d00cd73c78b58296fa9be1d5df909f",
+          "size": 4301,
+          "step_id": "S2",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-6ff312202eb65ddb2f49c884",
+          "kind": "project",
+          "relative_path": "artifacts/S2/native/probe.aprx",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "6d3b702d39f3371ab02c98f767c8593754111cf27aac6c0da85cfbf9d0fb249a",
+          "size": 14575,
+          "step_id": "S2",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-fd39a655a55cd74db96109da",
+          "kind": "check",
+          "relative_path": "artifacts/S2/native/summary.json",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "890faec0bfdf8159c50cd710a3bd857fc90d8c4965a9d563d25a14185e5df716",
+          "size": 276,
+          "step_id": "S2",
+          "verified": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "step_id": "S3",
+      "job_id": "JOB-3690f05914d66b96f1c578f8c525e1e7",
+      "state": "succeeded",
+      "software": {
+        "name": "MATLAB",
+        "version": "9.12.0.1884302"
+      },
+      "checks": [
+        {
+          "check_id": "native-readback",
+          "passed": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "ART-f16e5515b0280dd514aa712d",
+          "kind": "data",
+          "relative_path": "artifacts/S3/native/subset.mat",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "4926d4d6b76d264f2496a445028157befb63b06de749ec5df3ebfcd4af7697b9",
+          "size": 1638,
+          "step_id": "S3",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-ec92ecd0c81f70654b97fc5a",
+          "kind": "check",
+          "relative_path": "artifacts/S3/native/summary.json",
+          "run_id": "RUN-1999fb16a1ab47c4bfceeb659e3c28c1",
+          "sha256": "1af730c4d935368d487dc5d7b0acbb5efeb4236620f5012d4c9c01a532ad86eb",
+          "size": 214,
+          "step_id": "S3",
+          "verified": true
+        }
+      ],
+      "error": null
+    }
+  ]
+}

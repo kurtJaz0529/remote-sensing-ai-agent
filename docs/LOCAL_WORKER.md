@@ -1,5 +1,7 @@
 # T08 持久 worker 与三软件最小验证
 
+本页保留前一批次状态。最新接入已推进到固定原生后端，且用户指定只用MCP，默认入口改为 [MCP_ONLY](MCP_ONLY.md)；旧JSON-RPC入口仅作为历史协议测试，不作为新软件接入方式。
+
 本批在协议 0.1.0 上新增 `orchestrator.local_worker`。协调器配置示例：
 
 ```json
