@@ -1,0 +1,264 @@
+[
+  {
+    "question_id": "RET-EVAL-001",
+    "category": "envi_headless_engine",
+    "query": "KNOW-ENVI-TASK-001",
+    "filters": {
+      "software": "ENVI",
+      "version": "5.6.0",
+      "licenses": [
+        "ENVI"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-ENVI-TASK-001"
+    ],
+    "expected_source_ids": [
+      "SRC-ENVI-002",
+      "SRC-ENVI-005"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-002",
+    "category": "envi_supervised_mlc",
+    "query": "KNOW-ENVI-ML-001",
+    "filters": {
+      "software": "ENVI",
+      "version": "5.6.0",
+      "licenses": [
+        "ENVI"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-ENVI-ML-001"
+    ],
+    "expected_source_ids": [
+      "SRC-ENVI-004",
+      "SRC-CLASS-001"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-003",
+    "category": "envi_parallelepiped_overlap",
+    "query": "KNOW-ENVI-PP-001",
+    "filters": {
+      "software": "ENVI",
+      "version": "5.6.0",
+      "licenses": [
+        "ENVI"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-ENVI-PP-001"
+    ],
+    "expected_source_ids": [
+      "SRC-ENVI-004",
+      "SRC-DATA-003"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-004",
+    "category": "envi_postprocessing_sieve_clump",
+    "query": "KNOW-ENVI-POST-001",
+    "filters": {
+      "software": "ENVI",
+      "version": "5.6.0",
+      "licenses": [
+        "ENVI"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-ENVI-POST-001"
+    ],
+    "expected_source_ids": [
+      "SRC-CLASS-003",
+      "SRC-CLASS-004"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-005",
+    "category": "matlab_base_license_boundary",
+    "query": "KNOW-MATLAB-ENV-001",
+    "filters": {
+      "software": "MATLAB",
+      "version": "R2022a",
+      "licenses": [
+        "MATLAB"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-MATLAB-ENV-001"
+    ],
+    "expected_source_ids": [
+      "SRC-MATLAB-001",
+      "SRC-DATA-003"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-006",
+    "category": "matlab_isodata_kmeans",
+    "query": "KNOW-MATLAB-CLUSTER-001",
+    "filters": {
+      "software": "MATLAB",
+      "version": "R2022a",
+      "licenses": [
+        "MATLAB"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-MATLAB-CLUSTER-001"
+    ],
+    "expected_source_ids": [
+      "SRC-CLASS-001",
+      "SRC-CLASS-002"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-007",
+    "category": "arcgis_spatial_image_analyst",
+    "query": "KNOW-ARCGIS-ENV-001",
+    "filters": {
+      "software": "ArcGISPro",
+      "version": "3.6.0",
+      "licenses": [
+        "ArcGISPro",
+        "SpatialAnalyst",
+        "ImageAnalyst"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "GeoTIFF",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-ARCGIS-ENV-001"
+    ],
+    "expected_source_ids": [
+      "SRC-ARCGIS-001",
+      "SRC-ARCGIS-002"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-008",
+    "category": "arcgis_missing_extension_gate",
+    "query": "SpatialAnalyst",
+    "filters": {
+      "software": "ArcGISPro",
+      "version": "3.6.0",
+      "licenses": [
+        "ArcGISPro"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "GeoTIFF",
+      "include_candidates": true,
+      "limit": 5
+    },
+    "expected_knowledge_ids": [],
+    "expected_source_ids": []
+  },
+  {
+    "question_id": "RET-EVAL-009",
+    "category": "dataset_missing_crs_and_scale",
+    "query": "KNOW-DATA-CRS-001",
+    "filters": {
+      "software": "General",
+      "version": "0.1.0",
+      "licenses": [],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-DATA-CRS-001"
+    ],
+    "expected_source_ids": [
+      "SRC-ENVI-008",
+      "SRC-DATA-003"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-010",
+    "category": "spectral_indices_and_kt_third",
+    "query": "KNOW-SPEC-INDEX-001",
+    "filters": {
+      "software": "General",
+      "version": "0.1.0",
+      "licenses": [],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-SPEC-INDEX-001"
+    ],
+    "expected_source_ids": [
+      "SRC-METHOD-001",
+      "SRC-METHOD-003"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-011",
+    "category": "evaluation_protocol_and_confusion_matrix",
+    "query": "KNOW-EVAL-PROTOCOL-001",
+    "filters": {
+      "software": "General",
+      "version": "0.1.0",
+      "licenses": [],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": true,
+      "limit": 1
+    },
+    "expected_knowledge_ids": [
+      "KNOW-EVAL-PROTOCOL-001"
+    ],
+    "expected_source_ids": [
+      "SRC-EVAL-001",
+      "SRC-EVAL-002"
+    ]
+  },
+  {
+    "question_id": "RET-EVAL-012",
+    "category": "unverified_candidate_blocked_when_published_only",
+    "query": "KNOW-ENVI-ML-001",
+    "filters": {
+      "software": "ENVI",
+      "version": "5.6.0",
+      "licenses": [
+        "ENVI"
+      ],
+      "product": "Landsat-TM",
+      "input_format": "ENVI",
+      "include_candidates": false,
+      "limit": 5
+    },
+    "expected_knowledge_ids": [],
+    "expected_source_ids": []
+  }
+]

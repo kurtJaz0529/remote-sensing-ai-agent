@@ -1,0 +1,14 @@
+{
+  "registered_files": 196,
+  "png_count": 71,
+  "invalid_png_count": 0,
+  "valid_structure_only_count": 71,
+  "one_byte_png_count": 0,
+  "known_canon_city_duplicate_count": 1,
+  "input_manifest_hash": "1b9a9d92f8034fcac42cd8ea44ca492cc4dbd479049ca86d12bebf5a8f9cc046",
+  "scope": "registered file structure audit only; no untouched holdout or new accuracy claim",
+  "warnings": [
+    "Previously processed files are not automatically independent holdouts.",
+    "RGB PNGs do not establish spectral band calibration or CRS."
+  ]
+}

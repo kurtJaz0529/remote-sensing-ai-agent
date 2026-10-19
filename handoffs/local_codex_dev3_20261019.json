@@ -1,0 +1,53 @@
+{
+  "schema_revision": "0.1.0",
+  "task_id": "T04-T10-T16-T17-T24-T27-T31",
+  "from_role": "local_codex",
+  "to_role": "cross_member_reviewer",
+  "status": "diagnostic_preview_ready_for_review",
+  "spec_revision": "v1.1",
+  "base_version": "0.1.0.dev3",
+  "artifact_manifest": "releases/release_manifest-dev3.json",
+  "input_refs": [
+    "registered-input-manifest:55684478dbdf789c347d157a6d936b85511794c71500c5ff706fe624c0f5a32d",
+    "registered-input-manifest:19b9a9fd8ab3cd4176ed3b1205f55e1a8cede1d86c41a9e2629f1479a8e151cc"
+  ],
+  "changed_files": [
+    "orchestrator/",
+    "adapters/",
+    "methods/",
+    "verification/",
+    "reports/",
+    "skills/",
+    "tests/",
+    "evidence/diagnostic-integration-20261019/"
+  ],
+  "result_summary": [
+    "Native ENVI classification diagnostic and second RGB crop verified through MCP",
+    "Existing candidate component branch integrated with scientific/report/routing guard fixes",
+    "DeepSeek tool and synthetic vision API probes passed; no user imagery transmitted",
+    "ENVI Classic three original diagnostic screenshots; 17 and 9 file archive restores passed"
+  ],
+  "validation": {
+    "static_or_mock": [
+      "evidence/diagnostic-integration-20261019/source-tests.json",
+      "evidence/diagnostic-integration-20261019/installed-wheel-smoke.json"
+    ],
+    "real_software_run_ids": [
+      "RUN-e092b96f272e4415bb5eea661ce1285e",
+      "RUN-f1d775c028654d5f97914605d13edc06"
+    ],
+    "evidence_manifest": "evidence/diagnostic-integration-20261019/manifest.json"
+  },
+  "limitations": [
+    "Guide JM sample criterion failed; minimum 1.1588",
+    "Existing evaluation points are diagnostic, not held-out accuracy",
+    "Full experiment screenshots, template report/PDF and independent T25/T30 acceptance missing",
+    "Candidate skills and knowledge not enabled for default execution",
+    "GPT real API and automatic natural-language planning not verified"
+  ],
+  "open_questions": [
+    "Independent interpretation and correction of training ROI",
+    "Untouched reserved case and non-public acceptance questions"
+  ],
+  "next_action": "Review this PR evidence, qualify ROI and freeze a new held-out protocol before complete lab/report acceptance"
+}

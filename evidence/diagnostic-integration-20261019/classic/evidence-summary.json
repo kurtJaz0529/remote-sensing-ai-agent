@@ -1,0 +1,107 @@
+{
+  "session": {
+    "session_id": "3028f1261b254c7288933a0e60e11688",
+    "process_id": 54596,
+    "experiment_name": "T16_MCP_Classic_capability_probe",
+    "mode": "diagnostic",
+    "launched_at": "2026-10-19T14:10:43.004758+00:00",
+    "envi_version": "5.6.0.0"
+  },
+  "stage_plan": {
+    "locked": true,
+    "locked_at": "2026-10-19T14:11:15.928073+00:00",
+    "minimum_screenshots": 3,
+    "require_output": false,
+    "stages": [
+      {
+        "stage_id": "01-classic-main",
+        "caption": "ENVI Classic MCP受控主窗口",
+        "evidence_type": "tool",
+        "action_summary": "验证MCP启动会话的实际窗口身份",
+        "required_parameters": [],
+        "expected_window_contains": "ENVI Classic"
+      },
+      {
+        "stage_id": "02-open-input-dialog",
+        "caption": "打开登记影像的文件对话框",
+        "evidence_type": "parameter",
+        "action_summary": "使用真实菜单打开影像",
+        "required_parameters": [
+          "source_sha256"
+        ],
+        "expected_window_contains": null
+      },
+      {
+        "stage_id": "03-loaded-raster",
+        "caption": "已载入登记影像的波段列表",
+        "evidence_type": "result",
+        "action_summary": "核对六波段Canon City影像",
+        "required_parameters": [
+          "source_sha256",
+          "bands"
+        ],
+        "expected_window_contains": null
+      }
+    ]
+  },
+  "steps": [
+    {
+      "ordinal": 1,
+      "stage_id": "01-classic-main",
+      "caption": "ENVI Classic MCP受控主窗口",
+      "action_summary": "MCP diagnostic会话窗口身份探测，不是分类实验完成证据",
+      "parameters": {},
+      "evidence_type": "tool",
+      "window_title": "ENVI Classic",
+      "sha256": "84a9e6e39795940fef610bef44872549c4bdb24c0632e8b1e8a34dfb01433d9f",
+      "captured_at": "2026-10-19T14:11:16.409985+00:00",
+      "width": 1358,
+      "height": 112,
+      "relative_path": "classic/screenshots/001-01-classic-main.png"
+    },
+    {
+      "ordinal": 2,
+      "stage_id": "02-open-input-dialog",
+      "caption": "打开登记影像的文件对话框",
+      "action_summary": "通过MCP输入原始Canon City影像路径，尚未执行打开",
+      "parameters": {
+        "source_sha256": "121f1268c855ace06edd642ff191ff04da74499df3ff70c69c8b8bcee11345e5"
+      },
+      "evidence_type": "parameter",
+      "window_title": "Enter Data Filenames",
+      "sha256": "0e59f0483021eec87ffd71e839d31bf871607c75f582f24236349cf873ead3ed",
+      "captured_at": "2026-10-19T14:11:48.239224+00:00",
+      "width": 1279,
+      "height": 840,
+      "relative_path": "classic/screenshots/002-02-open-input-dialog.png"
+    },
+    {
+      "ordinal": 3,
+      "stage_id": "03-loaded-raster",
+      "caption": "已载入登记影像的波段列表",
+      "action_summary": "MCP验证原始影像读入后六波段列表，不是最终分类结果",
+      "parameters": {
+        "source_sha256": "121f1268c855ace06edd642ff191ff04da74499df3ff70c69c8b8bcee11345e5",
+        "bands": [
+          "TM1",
+          "TM2",
+          "TM3",
+          "TM4",
+          "TM5",
+          "TM7"
+        ]
+      },
+      "evidence_type": "result",
+      "window_title": "Available Bands List",
+      "sha256": "086a3259cef28396cda6b3e9fbe01182afa325d5d29e3d136d9d07818350ba1c",
+      "captured_at": "2026-10-19T14:12:00.543324+00:00",
+      "width": 450,
+      "height": 863,
+      "relative_path": "classic/screenshots/003-03-loaded-raster.png"
+    }
+  ],
+  "raw_manifest_sha256": "8c66608c359ea33790c25102fe277138bcb4be36e320a6400c7fb7d28bb6da50",
+  "diagnostic_evidence_complete": true,
+  "formal_experiment_ready": false,
+  "scope": "Original unedited ENVI Classic MCP diagnostic screenshots; not the classification experiment screenshot set"
+}

@@ -1,5 +1,11 @@
 # 三成员交接
 
+用户最新限定：只用 MCP，禁止 Computer Use。软件处理及 ENVI Classic 会话取证使用专用 MCP；遵循 [MCP入口与进程生命周期](MCP_ONLY.md)。
+
+最新上交见 [分类诊断、候选组件集成与第二案例验证](DIAGNOSTIC_INTEGRATION_20261019.md)：ENVI 原生 ML/3x3 smoothing、第二幅 RGB 裁剪、Classic 三张诊断截图、DeepSeek 工具/视觉探针及两份归档恢复通过；108 项测试零失败、一项权限跳过。合格 ROI、完整截图报告及独立保留验收仍待完成。以下原云端/早期交接段落保留历史，状态以最新交付和 Notion 台账为准。
+
+最新本地批次见 [T08 进程与三软件验证](LOCAL_WORKER.md)。独立进程协议已通过故障测试；三软件最小直接处理与重读有真实证据。真实后端尚未绑定统一 worker，不自签整体完成；继续 T08 handler/环境隔离与 T16 截图，再按依赖进入 T24。此前 T01/T02 批次保留在 [前置记录](LOCAL_FOUNDATION_20261019.md)。
+
 先读README、COLLABORATION、COVERAGE、WORKER_PROTOCOL，再看contracts/、examples/与specs/原文快照。Notion任务汇总继续更新同一编号；根据用户2026-10-19的新要求，代码及公共文件在GitHub协作。本地Codex与Antigravity继续开发，云端Codex后续承接补充工作。源码已导入本仓库，跨环境不依赖云端工作区路径。
 
 ## 本地 Codex 接手

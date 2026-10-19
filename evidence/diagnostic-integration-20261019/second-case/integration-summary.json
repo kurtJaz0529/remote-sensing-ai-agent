@@ -1,0 +1,61 @@
+{
+  "run_id": "RUN-f1d775c028654d5f97914605d13edc06",
+  "state": "Completed",
+  "plan_sha256": "9865b75cd503d29ea94cd5f1de6ddb2108e26410a7abe47bdd3ef07ad43631e6",
+  "input_manifest_hash": "19b9a9fd8ab3cd4176ed3b1205f55e1a8cede1d86c41a9e2629f1479a8e151cc",
+  "originals_unchanged": true,
+  "steps": [
+    {
+      "step_id": "S1",
+      "job_id": "JOB-58f66fb83ae47db4b0f23d2ccf8a061e",
+      "state": "succeeded",
+      "software": {
+        "name": "ENVI",
+        "version": "5.6"
+      },
+      "checks": [
+        {
+          "check_id": "native-readback",
+          "passed": true
+        },
+        {
+          "check_id": "rgb-pixel-equality",
+          "passed": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "ART-11bcd3e17f2bd9776640378f",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/rgb-subset.dat",
+          "run_id": "RUN-f1d775c028654d5f97914605d13edc06",
+          "sha256": "4c451f15fc70c48fe590e4b909742550c1bc514df06acd70afb55cb6b7b21f29",
+          "size": 12288,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-ed6d983ec2617174e8cd9576",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/rgb-subset.hdr",
+          "run_id": "RUN-f1d775c028654d5f97914605d13edc06",
+          "sha256": "65d64e870203794dacb4ff1e1215eb88432dd3f9627fff39682971881c57032c",
+          "size": 142,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-599b0274948dc5af76beb64e",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/summary.json",
+          "run_id": "RUN-f1d775c028654d5f97914605d13edc06",
+          "sha256": "f35e003218ad204f411b795807c793de0bcc8f578e5e90d97c55dd84d6e7d546",
+          "size": 558,
+          "step_id": "S1",
+          "verified": true
+        }
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "failed_run": "RUN-078e79aa8edb436b9e5f01d2445b4331",
+  "failure": "Reader assumed BSQ; native output header specifies BIP",
+  "fixed_run": "RUN-f1d775c028654d5f97914605d13edc06",
+  "fix": "Decode BSQ/BIL/BIP using the actual header; no changes to source or native output",
+  "final_pixel_differences": 0,
+  "holdout_accuracy_verified": false
+}

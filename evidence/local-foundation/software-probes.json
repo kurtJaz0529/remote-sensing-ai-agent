@@ -1,0 +1,60 @@
+{
+  "observed_date": "2026-10-19",
+  "envi": {
+    "python": {
+      "version": "3.12.13 (main, May 10 2026, 19:35:37) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "D:\\agent\\codex\\envi-mcp-server\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "envipyengine_importable": true,
+    "taskengine": {
+      "path": "C:\\Program Files\\Harris\\ENVI56\\IDL88\\bin\\bin.x86_64\\taskengine.exe",
+      "source": "ENVI_ENGINE",
+      "exists": true,
+      "attempted": [
+        "ENVI_ENGINE: C:\\Program Files\\Harris\\ENVI56\\IDL88\\bin\\bin.x86_64\\taskengine.exe"
+      ]
+    },
+    "envi_started": true,
+    "task_count": 240,
+    "sar_task_count": 1,
+    "sar_task_examples": [
+      "RadarBackscatter"
+    ],
+    "success": true,
+    "errors": [],
+    "suggestions": []
+  },
+  "matlab": {
+    "version": "9.12.0.1884302",
+    "release": "R2022a",
+    "products": [
+      {
+        "name": "MATLAB",
+        "version": "9.12"
+      }
+    ],
+    "license_test": 1,
+    "evidence": "Live MATLAB MCP: version, matlabroot, ver, license('test','MATLAB')",
+    "processing_verified": false
+  },
+  "arcgis": {
+    "version": "3.6",
+    "build": "59527",
+    "product_info": "ArcInfo",
+    "license_level": "Advanced",
+    "extensions": {
+      "Spatial": "Available",
+      "ImageAnalyst": "Available"
+    },
+    "python": "3.13.7",
+    "evidence": "ArcGIS Pro dedicated Python: arcpy.GetInstallInfo/ProductInfo/CheckExtension",
+    "processing_verified": false
+  },
+  "limitations": [
+    "License checks are observations at probe time, not guarantees for future jobs.",
+    "ENVI task listing is not execution of each task.",
+    "Desktop screenshot identity and real-data processing have not been verified.",
+    "No API secrets were read."
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "training_pixels": [
+    250,
+    250,
+    250,
+    100,
+    250,
+    246
+  ],
+  "training_regions": [
+    10,
+    10,
+    10,
+    9,
+    10,
+    10
+  ],
+  "test_pixels": [
+    44,
+    45,
+    23,
+    20,
+    47,
+    21
+  ],
+  "buffer_chebyshev_pixels": 5,
+  "buffer_violations": 0,
+  "classification_units": "stored uint8 values; no calibrated reflectance claim",
+  "crs": "unknown",
+  "area_unit": "pixel squared",
+  "nodata": "not declared; zero is not automatically masked",
+  "evaluation_kind": "diagnostic_reassessment",
+  "warnings": [
+    "Existing test labels have already been inspected in earlier work; not an independent holdout.",
+    "Training semantic labels still require independent image interpretation.",
+    "Some training class pairs do not meet the guide JM>1.9 criterion. Formal training acceptance is not passed; this run remains diagnostic."
+  ],
+  "separability": {
+    "pairs": [
+      {
+        "class_a": 1,
+        "class_b": 2,
+        "jm": 1.995436858464438,
+        "td": 1.9999715544383543,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 1,
+        "class_b": 3,
+        "jm": 1.985232978034953,
+        "td": 1.9999326477143622,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 1,
+        "class_b": 4,
+        "jm": 1.9999997385223158,
+        "td": 1.9999999999984883,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 1,
+        "class_b": 5,
+        "jm": 1.9315343309881294,
+        "td": 1.9936662710390307,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 1,
+        "class_b": 6,
+        "jm": 1.9998406605068735,
+        "td": 1.999999999999706,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 2,
+        "class_b": 3,
+        "jm": 1.9978516566587485,
+        "td": 1.999594205824054,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 2,
+        "class_b": 4,
+        "jm": 1.9986287095034907,
+        "td": 1.999687889354163,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 2,
+        "class_b": 5,
+        "jm": 1.9950100414977852,
+        "td": 1.9984648430977694,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 2,
+        "class_b": 6,
+        "jm": 1.9999988913321047,
+        "td": 1.999999999999994,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 3,
+        "class_b": 4,
+        "jm": 1.9999934282926741,
+        "td": 1.9999999999996614,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 3,
+        "class_b": 5,
+        "jm": 1.158786680037986,
+        "td": 1.4620379995044641,
+        "guide_jm_qualified": false,
+        "guide_reselection_required": true
+      },
+      {
+        "class_a": 3,
+        "class_b": 6,
+        "jm": 1.9987817406658497,
+        "td": 1.9999999992476354,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 4,
+        "class_b": 5,
+        "jm": 1.9999592382347415,
+        "td": 1.9999872136644254,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 4,
+        "class_b": 6,
+        "jm": 1.9999999970628672,
+        "td": 1.9999999999669789,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      },
+      {
+        "class_a": 5,
+        "class_b": 6,
+        "jm": 1.9682668713516307,
+        "td": 1.9944515141011994,
+        "guide_jm_qualified": true,
+        "guide_reselection_required": false
+      }
+    ],
+    "all_guide_jm_qualified": false,
+    "minimum_jm": 1.158786680037986,
+    "scope": "regularized sample moments in stored units; separability does not establish semantic label validity"
+  }
+}

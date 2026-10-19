@@ -1,0 +1,106 @@
+{
+  "batch": "diagnostic-integration-20261019",
+  "scope": "Public sanitized evidence only; original rasters, CSV labels and private runtime databases excluded",
+  "files": [
+    {
+      "relative_path": "classic/evidence-summary.json",
+      "size": 3900,
+      "sha256": "8a12928f3dab94f0786b48ffdf249059186eabf2ab85387717f98e4f55ad10c3"
+    },
+    {
+      "relative_path": "classic/screenshots/001-01-classic-main.png",
+      "size": 35585,
+      "sha256": "84a9e6e39795940fef610bef44872549c4bdb24c0632e8b1e8a34dfb01433d9f"
+    },
+    {
+      "relative_path": "classic/screenshots/002-02-open-input-dialog.png",
+      "size": 235115,
+      "sha256": "0e59f0483021eec87ffd71e839d31bf871607c75f582f24236349cf873ead3ed"
+    },
+    {
+      "relative_path": "classic/screenshots/003-03-loaded-raster.png",
+      "size": 71854,
+      "sha256": "086a3259cef28396cda6b3e9fbe01182afa325d5d29e3d136d9d07818350ba1c"
+    },
+    {
+      "relative_path": "classification/diagnostic-metrics.json",
+      "size": 2917,
+      "sha256": "12c23af5797e4935af02f928577127c32e4e0603ccddd02c130a07e60644abb3"
+    },
+    {
+      "relative_path": "classification/integration-summary.json",
+      "size": 5467,
+      "sha256": "6d87d475428b33ee229d88c97220cf38e9c7cf45228732e23180031d1665a175"
+    },
+    {
+      "relative_path": "classification/native-reference-check.json",
+      "size": 149,
+      "sha256": "ba725be5a1aea5c7061fd775e9c3f9ae3b539d123e2b8fc5215c4f64f2d24466"
+    },
+    {
+      "relative_path": "classification/sample-audit.json",
+      "size": 4403,
+      "sha256": "9f1f29969f7a7448778f9b4668f5a9813b57e4403026959012e96dc4f3757d23"
+    },
+    {
+      "relative_path": "classification/summary.json",
+      "size": 837,
+      "sha256": "91daab7d6cc1b0d4f20efc8dab3fcb8cb6b0ba12a7d4b5f2f61160530214db77"
+    },
+    {
+      "relative_path": "component-review/verification.json",
+      "size": 10571,
+      "sha256": "7dc308347b93efb5b08b68a8b51b21e8b7e1321adf8ab64afa7577f35a71e3d9"
+    },
+    {
+      "relative_path": "installed-wheel-smoke.json",
+      "size": 421,
+      "sha256": "76717b2191bf60a7780f4a8501bb3407d0eb80ff01231ed5e93f6696cfda2203"
+    },
+    {
+      "relative_path": "provider/tool-result.json",
+      "size": 974,
+      "sha256": "43706a81e278f72183dc59dac6c0c4a9e797196f54d5f8dd23b30a2892bceb0c"
+    },
+    {
+      "relative_path": "provider/usage-summary.json",
+      "size": 1619,
+      "sha256": "6dd3d06d339bd54a00bccd267a3c775ebe67e58270646d8c8ce432fae4b36a0e"
+    },
+    {
+      "relative_path": "provider/vision-result.json",
+      "size": 507,
+      "sha256": "76519ee463fa57ee5fa8e72aef8e2eb0b83ed9c37e2522a298c02c01f496e730"
+    },
+    {
+      "relative_path": "second-case/failure-history.json",
+      "size": 357,
+      "sha256": "0b89ce7c86e4a31f8f54bd2e094abf360fe0eefe70d7580b626f6892d1b88853"
+    },
+    {
+      "relative_path": "second-case/header-aware-reference-check.json",
+      "size": 402,
+      "sha256": "2b709d28ed045e38a023841b7189033d3bbe367dc4c3648679636b3ae26feda9"
+    },
+    {
+      "relative_path": "second-case/input-audit-summary.json",
+      "size": 546,
+      "sha256": "1a294f62f91e7f5918f8bbe4cc5bf25425fc4c59496a96a7594ef82aba51578a"
+    },
+    {
+      "relative_path": "second-case/integration-summary.json",
+      "size": 1997,
+      "sha256": "4768d6e19ccc2a71ae155e4b52f21c34f9a989dcb428f3556c76780525ccbf60"
+    },
+    {
+      "relative_path": "second-case/native-summary.json",
+      "size": 558,
+      "sha256": "f35e003218ad204f411b795807c793de0bcc8f578e5e90d97c55dd84d6e7d546"
+    },
+    {
+      "relative_path": "source-tests.json",
+      "size": 5273,
+      "sha256": "3907086629c3a7b7eb7fb468039108bb0b0f36dcd2f19d7f938671f2eff16ac0"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-19",
+  "command": "python -X utf8 -m unittest discover -s tests -q",
+  "tests_run": 66,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "worker_tests": 11,
+  "scope": "Unit and real subprocess protocol tests; native probe results are separately recorded",
+  "independent_review": "pending"
+}

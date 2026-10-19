@@ -1,0 +1,51 @@
+{
+  "software": "ENVI",
+  "version": "5.6",
+  "readback_equal": true,
+  "scope": "native classification and smoothing with reused diagnostic test points; no new independent accuracy",
+  "native_reference_differences": 0,
+  "training_pixels": [
+    250,
+    250,
+    250,
+    100,
+    250,
+    246
+  ],
+  "test_pixels": [
+    44,
+    45,
+    23,
+    20,
+    47,
+    21
+  ],
+  "classification_codes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "smoothing_kernel": 3,
+  "checks": [
+    {
+      "check_id": "native-readback",
+      "passed": true
+    },
+    {
+      "check_id": "sample-buffer",
+      "passed": true
+    },
+    {
+      "check_id": "native-gaussian-match",
+      "passed": true
+    },
+    {
+      "check_id": "diagnostic-matrix",
+      "passed": true
+    }
+  ]
+}
