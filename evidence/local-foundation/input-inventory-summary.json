@@ -1,0 +1,56 @@
+{
+  "observed_date": "2026-10-19",
+  "source_notion": "https://www.notion.so/3fcc5fcc8d9381028310efb0dae1ba37",
+  "archive_file_count": 591,
+  "manifest_sha256": "e8dedd33a8995bbdd484affff78ae6a83eb8dbdbf76f73ddd3b9aede363e6126",
+  "selected_original_files": [
+    {
+      "relative_path": "图像分类/ENVI5.X非监督分类流程.doc",
+      "sha256": "edce0d7de8b16adebda83883a07522c8dc42465840f49ef3a94ce122cdf2072d",
+      "size": 1326080
+    },
+    {
+      "relative_path": "图像分类/任务六 遥感图像分类.doc",
+      "sha256": "a211a29f08d719aaa471fcc2f7d932849e2132c1f2f926e0525d5ef533987da9",
+      "size": 773120
+    },
+    {
+      "relative_path": "图像分类/分类数据/can_tmr.hdr",
+      "sha256": "01298e3ea14ded47c21c99f657be3105d74263bbcf1b2457e08f091e99d882ef",
+      "size": 469
+    },
+    {
+      "relative_path": "图像分类/分类数据/can_tmr.img",
+      "sha256": "121f1268c855ace06edd642ff191ff04da74499df3ff70c69c8b8bcee11345e5",
+      "size": 1536000
+    },
+    {
+      "relative_path": "图像分类/分类数据/new_test_sample1.roi",
+      "sha256": "ab0477054c521b7729e203075942b66fb0f4ae411ee2ee293c97f1b5c7d3e727",
+      "size": 2888
+    },
+    {
+      "relative_path": "图像分类/图像分类ENVI操作步骤.pptx",
+      "sha256": "810f88fb5a7ac9ea5d3f84deb3662d0dccdce21fff46d37ef2b52f8db6ae6a03",
+      "size": 12437895
+    },
+    {
+      "relative_path": "图像分类/图像分类实验报告.docx",
+      "sha256": "264aebe1baa6408744b185d5ba80ed3a11c084a908b6bf05da985b8ad2b3da0e",
+      "size": 37291
+    }
+  ],
+  "matches_notion": {
+    "can_tmr.img": true,
+    "new_test_sample1.roi": true
+  },
+  "scientific_limits": [
+    "No map reference: pixel coordinates and pixel-squared area only.",
+    "Unknown scale/offset: no physical reflectance claim.",
+    "Historical test points are diagnostic, not an untouched holdout."
+  ],
+  "missing": [
+    "New independent T30 holdout",
+    "T07 acceptance matrix and T17 sample audit"
+  ]
+}

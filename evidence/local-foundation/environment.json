@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-10-19T13:37:41.0515715Z",
+  "scope": "Read-only installation and host inventory; license and processing require separate probes",
+  "os": {
+    "caption": "Microsoft Windows 11 家庭版 中文版",
+    "version": "10.0.26200",
+    "architecture": "64 位"
+  },
+  "resources": {
+    "cpu": "Intel(R) Core(TM) i7-14650HX",
+    "logical_processors": 24,
+    "memory_bytes": 33970794496
+  },
+  "arcgis": {
+    "install_dir": "F:\\ArcGIS\\Pro\\",
+    "registered_version": "3.6.0.59527",
+    "license_status": "unknown"
+  },
+  "envi": {
+    "license_status": "unknown",
+    "engine_exists": true
+  },
+  "desktop": {
+    "screenshot": "not_verified",
+    "interactive": true,
+    "window_identity": "not_verified"
+  },
+  "disks": [
+    {
+      "free_bytes": 10097614848,
+      "drive": "C"
+    },
+    {
+      "free_bytes": 216251559936,
+      "drive": "D"
+    },
+    {
+      "free_bytes": 29792882688,
+      "drive": "E"
+    },
+    {
+      "free_bytes": 37583101952,
+      "drive": "F"
+    },
+    {
+      "free_bytes": 9592733696,
+      "drive": "G"
+    },
+    {
+      "free_bytes": 10097614848,
+      "drive": "Temp"
+    }
+  ]
+}

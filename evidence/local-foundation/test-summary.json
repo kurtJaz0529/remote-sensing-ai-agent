@@ -1,0 +1,10 @@
+{
+  "observed_date": "2026-10-19",
+  "command": "python -X utf8 -m unittest discover -s tests -q",
+  "tests_run": 55,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "skip_reason": "Windows denied creating a symbolic link",
+  "scope": "Core and input inventory unit tests; not native software processing"
+}
