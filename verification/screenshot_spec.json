@@ -1,0 +1,118 @@
+{
+  "schema_revision": "0.1.0",
+  "spec_id": "SCREENSHOT-AND-EVIDENCE-SPEC-V1",
+  "author_role": "gemini_antigravity",
+  "review_status": "candidate",
+  "principles": [
+    "Every image or screenshot embedded in a report must trace back to an immutable artifact entry in runs/<run_id>/artifacts_index.json with a verified SHA256 digest.",
+    "Never fabricate GUI menu clicks or dialog screenshots when the step was executed via headless API/batch (envipyengine, matlab -batch, arcpy, or pure Python).",
+    "Every classification map figure must explicitly bind its class_mapping_manifest and legend (including 0=Unclassified when present) so colors and class labels never drift across software.",
+    "Comparison figures (e.g., Raw vs Majority vs Clump vs Sieve) must bind each subplot/panel to its exact branch_id and artifact_id to prevent panel/caption transposition."
+  ],
+  "required_screenshot_categories": [
+    {
+      "category_id": "FIG-DATA-OVERVIEW",
+      "title": "原始多光谱合成图与样本空间分布图",
+      "required_metadata": [
+        "run_id",
+        "artifact_id",
+        "sha256",
+        "rgb_band_combination",
+        "stretch_method",
+        "has_crs",
+        "coordinate_unit"
+      ],
+      "caption_rules": [
+        "Must state the exact RGB band mapping (e.g., TM4/TM3/TM2 false color or TM3/TM2/TM1 true color).",
+        "When has_crs is false, axis/scale labels must use pixel coordinates (column, row) and never claim geographic lat/lon or metric scale bars."
+      ]
+    },
+    {
+      "category_id": "FIG-SPECTRAL-TRANSFORM",
+      "title": "光谱指数、PCA 主成分与 K-T 变换分量图",
+      "required_metadata": [
+        "run_id",
+        "artifact_id",
+        "sha256",
+        "transform_kind",
+        "nodata_value",
+        "zero_denominator_count",
+        "fit_domain"
+      ],
+      "caption_rules": [
+        "For K-T transform on Landsat 5 TM, the 3rd panel must be labeled 'Third (Wetness-related)' rather than calibrated absolute wetness.",
+        "For PCA, caption must state fit_domain ('full_image_unsupervised' or 'train_split_only') and cumulative variance percentages."
+      ]
+    },
+    {
+      "category_id": "FIG-CLASSIFICATION-MAP",
+      "title": "非监督与监督分类专题图",
+      "required_metadata": [
+        "run_id",
+        "artifact_id",
+        "sha256",
+        "algorithm_id",
+        "software",
+        "execution_mode",
+        "class_mapping_id",
+        "unclassified_pixel_count"
+      ],
+      "caption_rules": [
+        "Legend must list every semantic class name alongside its native integer code and color.",
+        "If algorithm is Parallelepiped or thresholded ML or Sieve, 0=Unclassified must appear in the legend with its pixel share.",
+        "If ISODATA degenerated_to_kmeans is true, caption must disclose that 0 splits and 0 merges occurred."
+      ]
+    },
+    {
+      "category_id": "FIG-POSTPROCESS-COMPARISON",
+      "title": "分类后处理多分支对比图与局部放大图（含水体保持对比）",
+      "required_metadata": [
+        "run_id",
+        "panel_bindings",
+        "water_class_semantic_id",
+        "pre_post_pixel_counts"
+      ],
+      "caption_rules": [
+        "Each panel must map 1-to-1 to branch_id (e.g., raw_ml, majority_3x3, clump_3x3, sieve_2px, clump_then_sieve).",
+        "Must highlight linear water body retention/erosion when Majority or Clump causes water pixel loss exceeding threshold."
+      ]
+    }
+  ],
+  "execution_mode_wording_rules": {
+    "headless_api_or_batch": {
+      "allowed_phrases": [
+        "通过 envipyengine 无头任务接口执行",
+        "通过 matlab -batch 批处理脚本执行",
+        "通过 ArcGIS Pro arcpy 脚本执行",
+        "基于方法包确定性算子计算并导出专题渲染图"
+      ],
+      "forbidden_phrases": [
+        "点击菜单栏",
+        "在弹出的对话框中勾选",
+        "鼠标右键选择",
+        "手动拖拽窗口截图",
+        "在 Toolbox 界面双击打开"
+      ]
+    },
+    "interactive_gui": {
+      "required_proof_fields": [
+        "window_title",
+        "capture_timestamp",
+        "operator_role",
+        "raw_screenshot_sha256"
+      ]
+    }
+  },
+  "image_integrity_checks": {
+    "allowed_extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".tif",
+      ".tiff"
+    ],
+    "min_file_size_bytes": 512,
+    "require_sha256_match": true,
+    "require_unique_hash_across_distinct_branches": true
+  }
+}

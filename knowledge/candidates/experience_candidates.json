@@ -1,0 +1,177 @@
+[
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-CLASS-CODE-MAP-001",
+    "revision": 1,
+    "phenomenon": "跨软件/跨实验类别编码冲突：MATLAB历史归档使用 1=耕地,2=有林地,3=建设用地,4=水域,5=裸地,6=其他,0=未分类；ENVI实验八使用 1=耕地,2=有林地,3=裸地,4=建设用地,5=水域,6=其他,0=未分类（编码3/4/5不同）。直接按原始整数编码跨软件对比或制表会导致类别错位。修复规则：强制通过 class_mapping_manifest (native_code <-> semantic_id) 在语义空间对齐并校验（CHK-CLASS-MAP-001, CHK-EVAL-MATRIX-001, CHK-REPORT-TABLE-COL-001）。",
+    "scope": "multi_software_classification_and_reporting",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC",
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-EVAL-OVERCLAIM-002",
+    "revision": 1,
+    "phenomenon": "评估性质夸大：在同批200个诊断测试点上迭代修订样本获得的诊断重算精度（73.50%）或目视解译参考ROI一致性（43.50%），若在报告中直接表述为“独立样本真实泛化精度”或“全图无偏面积精度”，会造成方法学失真。修复规则：强制绑定 evaluation_kind（resubstitution / diagnostic_holdout / reference_agreement / buffered_independent_holdout），拦截越界泛化措辞（CHK-EVAL-KIND-001）。",
+    "scope": "classification_evaluation_and_report_generation",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC",
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-MATRIX-AXIS-003",
+    "revision": 1,
+    "phenomenon": "混淆矩阵行列方向顛倒与未分类漏算：ENVI实验八表4与表5曾出现制图精度（PA）与用户精度（UA）互换风险，且忽略 0=Unclassified 列会导致漏分误差被低估、PA虚高。修复规则：固定生成 C x (C+1) 非对称混淆矩阵（行=参考真实类别，列=预测类别含0=Unclassified），内置 detect_pa_ua_swap 自动检测行列互换（CHK-EVAL-PA-UA-001）。",
+    "scope": "classification_evaluation",
+    "evidence_run_ids": [
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-TABLE-COL-SWAP-004",
+    "revision": 1,
+    "phenomenon": "后处理对比表格列头与数据列错位及细长水体吞噬：ENVI实验八表6中 ML_Clump 与 ML_Sieve 列以及建设用地/水域面积列发生错位；同时 3x3 Majority 与 Clump(3x3) 导致细长水体 PA 从 92.54% 暴跌至 69.40%。修复规则：报告表格构建器强制按 manifest 字段 ID 与 semantic_id 绑定列顺序，后处理模块对水体等细长地物减幅超阈值触发 water_loss_warning（CHK-REPORT-TABLE-COL-001, CHK-POST-WATER-LOSS-001）。",
+    "scope": "postprocessing_and_report_generation",
+    "evidence_run_ids": [
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-UINT8-UNDERFLOW-005",
+    "revision": 1,
+    "phenomenon": "uint8无符号整型下溢与零分母异常：在 uint8 栅格（can_tmr.img）上直接执行波段差值或归一化指数（NDVI/NDWI/MNDWI），当被减波段较大时截断为 0，分母为 0 时产生 NaN/Inf。修复规则：光谱计算前强制转 float64，分母 abs(denom)<=1e-12 像元写入 nodata=-9999.0 并输出 zero_denominator_mask（CHK-SPEC-FLOAT-001）。",
+    "scope": "spectral_indices_and_transformations",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-MISSING-CRS-SCALE-006",
+    "revision": 1,
+    "phenomenon": "缺失空间参考与反射率缩放因子外推：can_tmr.hdr 不含 map info/CRS，像元值为 0..100 的 uint8；若直接声称公顷/平方千米面积或已定标 0..1 地表反射率，属于无依据外推。修复规则：dataset_audit 检测到 has_crs==False 时仅允许输出 pixel 与 pixel^2，scale_factor 未验证时仅允许报告存储值 0..100（CHK-AUDIT-CRS-001, CHK-AUDIT-SCALE-001）。",
+    "scope": "dataset_audit_and_report_generation",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC",
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-PARALLELEPIPED-OVERLAP-007",
+    "revision": 1,
+    "phenomenon": "平行六面体多重落入与未分类高占比：ENVI实验八中平行六面体 OA 仅 35.50%（未分类高达 31.50%）；而简单循环赋值会因类别遍历顺序静默覆盖多重落入像元。修复规则：显式配置 overlap_policy（first_class / min_standardized_distance / unclassified_on_overlap），单独统计 overlap_ratio 与 unclassified_ratio（CHK-CLASS-PP-001）。",
+    "scope": "supervised_classification",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC",
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-ISODATA-DEGENERACY-008",
+    "revision": 1,
+    "phenomenon": "ISODATA未触发分裂/合并时退化为K-Means：MATLAB历史实验中自写ISODATA在固定6类与默认阈值下 split_count=0, merge_count=0，实质与同初值K-Means完全一致。修复规则：运行日志必须记录每次迭代的 split_events 与 merge_events；当二者均为 0 时强制标记 degenerated_to_kmeans=True（CHK-CLASS-ISO-001）。",
+    "scope": "unsupervised_classification",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-SPATIAL-LEAKAGE-BUFFER-009",
+    "revision": 1,
+    "phenomenon": "训练/测试空间邻近泄露与PCA全图拟合泄露：从同一连续多边形拆分训练/测试点或全图拟合PCA后再在测试点上评估，会因空间自相关和特征信息泄露导致精度虚高。修复规则：强制执行 >=5 像元 Chebyshev 缓冲校验，监督分类下 PCA 仅允许在 train_split_only 上拟合均值与特征向量（CHK-AUDIT-BUFFER-001, CHK-SPEC-PCA-LEAK-001）。",
+    "scope": "dataset_audit_and_spectral_transform",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  },
+  {
+    "schema_revision": "0.1.0",
+    "experience_id": "EXP-API-GUI-HONESTY-010",
+    "revision": 1,
+    "phenomenon": "后台API/脚本批处理与GUI操作措辞混写：通过 envipyengine、matlab -batch 或 arcpy 无头执行时，若报告仍描写“点击菜单栏/弹出对话框截图”，则违背真实证据链原则。修复规则：报告生成与截图校验必须核对 execution_mode（gui vs headless_api/batch），禁止把无头批处理伪造为手工GUI交互（CHK-REPORT-HONESTY-001）。",
+    "scope": "report_generation_and_evidence_audit",
+    "evidence_run_ids": [
+      "HIST-MATLAB-ARCHIVE-3FCC5FCC",
+      "HIST-ENVI-EX8-ARCHIVE-C19B4979"
+    ],
+    "reproduction_run_ids": [],
+    "fix_comparison_run_ids": [],
+    "regression_run_ids": [],
+    "reviewer_role": null,
+    "author_role": "gemini_antigravity",
+    "status": "candidate",
+    "supersedes": null
+  }
+]
