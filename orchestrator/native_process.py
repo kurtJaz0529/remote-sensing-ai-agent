@@ -62,6 +62,6 @@ def execute_native(worker, job, run_root):
             raise ValueError('Native output link rejected')
         if not path.is_file():
             continue
-        kind = 'project' if path.suffix == '.aprx' else 'check' if path.name == 'summary.json' else 'data'
+        kind = 'project' if path.suffix == '.aprx' else 'check' if path.suffix == '.json' else 'data'
         artifacts.append(dict(artifact_id='ART-'+fingerprint(str(path.relative_to(run_root)))[:24],run_id=job['run_id'],step_id=job['step_id'],kind=kind,relative_path=path.relative_to(run_root).as_posix(),sha256=sha256(path),size=path.stat().st_size,verified=True))
-    worker.finish(job['job_id'], 'succeeded', outputs=artifacts)
+    worker.finish(job['job_id'], 'succeeded', outputs=artifacts, checks=summary.get('checks'))

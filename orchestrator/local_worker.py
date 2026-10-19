@@ -50,10 +50,11 @@ class LocalWorker:
             if job['output_dir'] != 'artifacts/' + job['step_id']:
                 raise ValueError('output must be the registered step directory')
             if run['mode'] == 'real':
-                from .native import REGISTRY, configuration, source_path
+                from .native import REGISTRY, configuration, source_path, validate_case_scope
                 if job['tool'] not in REGISTRY or job['implementation_kind'] != 'native' or job['tool_version'] != REGISTRY[job['tool']][1]:
                     raise ValueError('no verified native handler')
                 configuration(self.root, plan)
+                validate_case_scope(job,plan)
                 source_path(job, manifest, row['input_root'])
             elif job['tool'] != 'mock.echo' or job['tool_version'] != VERSION or job['implementation_kind'] != 'mock':
                 raise ValueError('no verified mock handler')
@@ -114,11 +115,11 @@ class LocalWorker:
             self.db.rollback()
             raise
 
-    def finish(self, job_id, status, error=None, outputs=None, release=True):
+    def finish(self, job_id, status, error=None, outputs=None, release=True, checks=None):
         with self.db:
             result = self.status(job_id)
             check = 'mock-nonempty' if result['implementation_kind'] == 'mock' else 'native-readback'
-            result.update(status=status, error=error, outputs=outputs or [], checks=[{'check_id': check, 'passed': True}] if status == 'succeeded' else [])
+            result.update(status=status, error=error, outputs=outputs or [], checks=(checks if checks is not None else [{'check_id': check, 'passed': True}]) if status == 'succeeded' else [])
             validate('result', result)
             self.db.execute('UPDATE jobs SET result=?,heartbeat=? WHERE id=?', (canonical(result), now(), job_id))
             if release:

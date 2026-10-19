@@ -32,6 +32,12 @@ def create_server(root, durable=False, port=8765):
         """Request cancellation; running jobs confirm cancellation asynchronously."""
         return invoke('cancel', job_id)
 
+    @server.tool()
+    def registered_input_audit(task_id: str, revision: int, approval_id: str) -> dict:
+        """Read-only PNG integrity audit over inputs bound to an approved plan."""
+        from .image_audit import registered_image_audit
+        return registered_image_audit(root,task_id,revision,approval_id)
+
     return server
 
 

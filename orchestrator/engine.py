@@ -106,11 +106,15 @@ class Engine:
 
     def _preflight(self, run):
         row, plan, manifest = self._plan(run["task"],run["revision"])
+        if fingerprint(plan) != row['hash'] or plan['input_manifest_hash'] != fingerprint(manifest):
+            raise ValueError('stored plan or input manifest fingerprint changed')
         self._validate_tools(plan,run["mode"])
         check_inputs(row["input_root"],manifest)
         run_root = self.store.root/"runs"/run["id"]
         if fingerprint(json.loads((run_root/"contract"/"plan.json").read_text(encoding="utf-8"))) != row["hash"]:
             raise ValueError("frozen plan changed")
+        if fingerprint(json.loads((run_root/'contract'/'input_manifest.json').read_text(encoding='utf-8'))) != fingerprint(manifest):
+            raise ValueError('frozen input manifest changed')
         return plan, manifest, run_root
 
     def _artifacts(self, result, job, root, required):

@@ -76,6 +76,21 @@ class RuntimeCase(unittest.TestCase):
         self.assertEqual(self.engine.execute(run,self.worker)["state"],"Blocked")
         self.assertEqual(self.worker.submissions,0)
 
+    def test_frozen_input_manifest_tamper_blocks_before_dispatch(self):
+        run=self.prepare()
+        path=self.base/'runtime'/'runs'/run/'contract'/'input_manifest.json'
+        changed=copy.deepcopy(self.manifest);changed['files'][0]['sha256']='0'*64
+        path.write_text(canonical(changed),encoding='utf-8')
+        self.assertEqual(self.engine.execute(run,self.worker)['state'],'Blocked')
+        self.assertEqual(self.worker.submissions,0)
+
+    def test_stored_plan_body_tamper_blocks_before_dispatch(self):
+        run=self.prepare();changed=copy.deepcopy(self.plan);changed['objective']='changed after approval'
+        with self.engine.store.db:
+            self.engine.store.db.execute('UPDATE plans SET body=?',(canonical(changed),))
+        self.assertEqual(self.engine.execute(run,self.worker)['state'],'Blocked')
+        self.assertEqual(self.worker.submissions,0)
+
     def test_invalid_parameters_never_dispatched(self):
         self.plan["method_plan"][0]["parameters"]["extra"]="unapproved"
         with self.assertRaises(ValidationError): self.prepare()

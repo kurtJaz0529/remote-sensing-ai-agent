@@ -34,7 +34,7 @@ class McpIntegrationTests(unittest.TestCase):
                         async with ClientSession(read,write) as session:
                             await session.initialize()
                             return {t.name for t in (await session.list_tools()).tools}
-                self.assertEqual(asyncio.run(discovery()),{'workflow_submit','run_status','run_cancel'})
+                self.assertEqual(asyncio.run(discovery()),{'workflow_submit','run_status','run_cancel','registered_input_audit'})
                 with socket.socket() as listener:
                     listener.bind(('127.0.0.1',0));port=listener.getsockname()[1]
                 log=(Path(tmp)/'mcp.log').open('wb')

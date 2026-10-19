@@ -3,10 +3,14 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 from contracts import fingerprint, validate
-from orchestrator.native import REGISTRY, command, configuration, source_path, tool
+from orchestrator.native import REGISTRY, command, configuration, source_path, tool, validate_case_scope
 
 
 class NativeBoundaryTests(unittest.TestCase):
+    def test_reused_labels_cannot_be_called_independent(self):
+        for kind in ['independent','reference_agreement','unknown']:
+            with self.assertRaises(ValueError):validate_case_scope({'tool':'envi.classification_case'},{'evaluation_kind':kind})
+        validate_case_scope({'tool':'envi.classification_case'},{'evaluation_kind':'diagnostic'})
     def test_closed_tools_and_parameter_schemas(self):
         for name in REGISTRY:
             validate('tool', tool(name))
