@@ -1,0 +1,334 @@
+{
+  "scope": "read-only component integration; not independent experiment acceptance",
+  "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+  "plan_hash": "4a8901c793ff229c946919aa5756d4023b3891e5b9f25d06adc72aade721071e",
+  "input_manifest_hash": "55684478dbdf789c347d157a6d936b85511794c71500c5ff706fe624c0f5a32d",
+  "native_bundle_audit": {
+    "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+    "mode": "real",
+    "passed": true,
+    "evidence_manifest_sha256": "97857619e4943c1fb34ca38f3f17a552995f987b94fcb38be2e3c3eea3955ea0",
+    "file_count": 17,
+    "scope": "file_integrity_only; local software and scientific correctness need independent review"
+  },
+  "metadata_passed": true,
+  "sample_evaluation": "diagnostic",
+  "minimum_sample_distance": 6.0,
+  "confusion_matrix_match": true,
+  "overall_accuracy_diagnostic": 0.725,
+  "kappa_diagnostic": 0.662959,
+  "ndvi_stored_value_arithmetic_match": true,
+  "pca_eigenvalues_match": true,
+  "spectral_scope": "16x16 stored-value arithmetic; no calibrated reflectance claim; Python reimplementation",
+  "formal_report_missing_evidence_blocked": true,
+  "fault_scenarios": {
+    "total_scenarios": 10,
+    "passed_scenarios": 10,
+    "all_passed": true,
+    "results": [
+      {
+        "scenario_id": "FAULT-01",
+        "historical_case_id": "HIST-ERR-01",
+        "check_id": "CHK-SPEC-FLOAT-001",
+        "passed": true,
+        "details": {
+          "negative_difference_preserved": true,
+          "zero_denominator_masked": true,
+          "disabled_float64_blocked": true
+        }
+      },
+      {
+        "scenario_id": "FAULT-02",
+        "historical_case_id": "HIST-ERR-02",
+        "check_id": "CHK-AUDIT-CRS-001",
+        "passed": true,
+        "details": {
+          "caught_check_ids": [
+            "CHK-AUDIT-CRS-001",
+            "CHK-AUDIT-SCALE-001"
+          ]
+        }
+      },
+      {
+        "scenario_id": "FAULT-03",
+        "historical_case_id": "HIST-ERR-03",
+        "check_id": "CHK-SPEC-KT-THIRD-001",
+        "passed": true,
+        "details": {
+          "mislabeling_blocked": true
+        }
+      },
+      {
+        "scenario_id": "FAULT-04",
+        "historical_case_id": "HIST-ERR-04",
+        "check_id": "CHK-SPEC-PCA-LEAK-001",
+        "passed": true,
+        "details": {
+          "pca_leakage_blocked": true
+        }
+      },
+      {
+        "scenario_id": "FAULT-05",
+        "historical_case_id": "HIST-ERR-05",
+        "check_id": "CHK-PREPROC-RESAMPLE-CAT-001",
+        "passed": true,
+        "details": {
+          "categorical_bilinear_blocked": true
+        }
+      },
+      {
+        "scenario_id": "FAULT-06",
+        "historical_case_id": "HIST-ERR-06",
+        "check_id": "CHK-AUDIT-BUFFER-001",
+        "passed": true,
+        "details": {
+          "buffer_actual_kind": "spatially_contaminated_holdout",
+          "diagnostic_actual_kind": "diagnostic_holdout"
+        }
+      },
+      {
+        "scenario_id": "FAULT-07",
+        "historical_case_id": "HIST-ERR-07",
+        "check_id": "CHK-EVAL-PA-UA-001",
+        "passed": true,
+        "details": {
+          "swapped_classes": [
+            "cropland"
+          ],
+          "omitted_unclassified_classes": [
+            "cropland"
+          ]
+        }
+      },
+      {
+        "scenario_id": "FAULT-08",
+        "historical_case_id": "HIST-ERR-08",
+        "check_id": "CHK-REPORT-TABLE-COL-001",
+        "passed": true,
+        "details": {
+          "table_swap_caught": true,
+          "water_loss_pct": 100.0
+        }
+      },
+      {
+        "scenario_id": "FAULT-09",
+        "historical_case_id": "HIST-ERR-09",
+        "check_id": "CHK-CLASS-MAP-001",
+        "passed": true,
+        "details": {
+          "colliding_native_codes": [
+            3,
+            4,
+            5
+          ],
+          "bridge_a_to_b": {
+            "0": 0,
+            "1": 1,
+            "2": 2,
+            "3": 4,
+            "4": 5,
+            "5": 3,
+            "6": 6
+          }
+        }
+      },
+      {
+        "scenario_id": "FAULT-10",
+        "historical_case_id": "HIST-ERR-10",
+        "check_id": "CHK-CLASS-ISO-001",
+        "passed": true,
+        "details": {
+          "isodata_degenerated_to_kmeans": true,
+          "invalid_parallelepiped_policy_blocked": true,
+          "headless_gui_fabrication_blocked": true
+        }
+      }
+    ]
+  },
+  "retrieval": {
+    "scope": "public_regression_only; exposed questions are not held-out acceptance",
+    "total": 12,
+    "passed": 12,
+    "results": [
+      {
+        "question_id": "RET-EVAL-001",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-ENVI-TASK-001"
+        ],
+        "returned_source_ids": [
+          "SRC-ENG-003",
+          "SRC-ENVI-002",
+          "SRC-ENVI-005",
+          "SRC-ENVI-006",
+          "SRC-ENVI-007"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-002",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-ENVI-ML-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-001",
+          "SRC-CLASS-004",
+          "SRC-ENVI-004"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-003",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-ENVI-PP-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-001",
+          "SRC-DATA-003",
+          "SRC-ENVI-004"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-004",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-ENVI-POST-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-003",
+          "SRC-CLASS-004"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-005",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-MATLAB-ENV-001"
+        ],
+        "returned_source_ids": [
+          "SRC-DATA-003",
+          "SRC-MATLAB-001",
+          "SRC-MATLAB-003",
+          "SRC-MATLAB-004",
+          "SRC-MATLAB-005"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-006",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-MATLAB-CLUSTER-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-001",
+          "SRC-CLASS-002",
+          "SRC-DATA-003"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-007",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-ARCGIS-ENV-001"
+        ],
+        "returned_source_ids": [
+          "SRC-ARCGIS-001",
+          "SRC-ARCGIS-002",
+          "SRC-ARCGIS-003",
+          "SRC-ARCGIS-006"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-008",
+        "passed": true,
+        "returned_knowledge_ids": [],
+        "returned_source_ids": []
+      },
+      {
+        "question_id": "RET-EVAL-009",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-DATA-CRS-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-004",
+          "SRC-DATA-003",
+          "SRC-ENVI-008"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-010",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-SPEC-INDEX-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-004",
+          "SRC-METHOD-001",
+          "SRC-METHOD-002",
+          "SRC-METHOD-003",
+          "SRC-METHOD-004"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-011",
+        "passed": true,
+        "returned_knowledge_ids": [
+          "KNOW-EVAL-PROTOCOL-001"
+        ],
+        "returned_source_ids": [
+          "SRC-CLASS-004",
+          "SRC-DATA-003",
+          "SRC-EVAL-001",
+          "SRC-EVAL-002",
+          "SRC-EVAL-003"
+        ]
+      },
+      {
+        "question_id": "RET-EVAL-012",
+        "passed": true,
+        "returned_knowledge_ids": [],
+        "returned_source_ids": []
+      }
+    ]
+  },
+  "published_default_results": 0,
+  "candidate_snapshot_hash": "a96f5c400d94d7aab30da38211e8def252715b9f94e9894eee55a3065d031977",
+  "recovery": [
+    {
+      "case": "classification",
+      "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+      "mode": "real",
+      "passed": true,
+      "evidence_manifest_sha256": "97857619e4943c1fb34ca38f3f17a552995f987b94fcb38be2e3c3eea3955ea0",
+      "file_count": 17,
+      "scope": "file_integrity_only; local software and scientific correctness need independent review",
+      "archive_sha256": "517e72f2b119b35df910d7fe01ee1fcd03f22447572b1fc9412d71c24ad46fa0"
+    },
+    {
+      "case": "second-rgb",
+      "run_id": "RUN-f1d775c028654d5f97914605d13edc06",
+      "mode": "real",
+      "passed": true,
+      "evidence_manifest_sha256": "32efaabad80439131b60589e7bfb78ef95873c9fa8742041f7dc536ee1ecef8f",
+      "file_count": 9,
+      "scope": "file_integrity_only; local software and scientific correctness need independent review",
+      "archive_sha256": "c3083ef5167f1434cebad024caf0dc0b449c351ebb2c6ae64f257b0668c656c3"
+    }
+  ],
+  "component_hashes": {
+    "methods/classification.py": "9958404e794feede54293283a9a286e082b644fa9a92e03213d9822947c7fc3e",
+    "methods/postprocess.py": "6cf279e0299a97e91e49027732b3d7aebe29373ba4aa566f9a968667c2f4a68c",
+    "methods/preprocess.py": "fbf8ade7c27129478dae32607b1ad7d30d1b59f81f908ba9ce037bc42f8570f6",
+    "methods/spectral.py": "6c13af956813c67e68ce1dade0493dd6f3861fd2443ac136da667851a6acc8ce",
+    "methods/__init__.py": "734326e08169c79db43d324cbcf454757e8d76fb6fdb75c5ac4b4739bc702af9",
+    "verification/classification_eval.py": "d95e51fcca1e79a9344e801a41f99edd46dc2a92d2bc7b814c2544ed094501bc",
+    "verification/dataset_audit.py": "196cd2b0ed457ab1b51d6b67d1266702f487c58553c7fd3c2a1215330d59e839",
+    "verification/fault_scenarios.py": "e1dc53112dda1e22885cbdc47b3b088fb83bfa7ff800fb86aba01a32f3190447",
+    "verification/__init__.py": "84d818fe142f22d91fa76aefef27952d763b1d7b30fe4aa86f5c35302dc6eb44",
+    "reports/report_builder.py": "0936b7701548409a4d2878e3d77fb29cf159dba66e1835627aa9a178e0b009e6",
+    "reports/__init__.py": "3c9b834c343a68e46da0dbef9c8fa18973afcce10d60ad26b64219c985503bd3",
+    "skills/loader.py": "f32b2f26620c8eab2b7899da4de569c6d220af64a8b2a44f962bfca7e739e14d",
+    "skills/__init__.py": "050b2e9f0f2d904aa8066ea4c8a763fbfaab34081e6f8c3f7f468817f66f859c"
+  }
+}

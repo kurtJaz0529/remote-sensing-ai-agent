@@ -9,10 +9,11 @@ from .worker import UncertainSubmission
 
 
 class McpWorker:
-    def __init__(self, command, timeout=30):
+    def __init__(self, command, timeout=30, env=None):
         if not command or not isinstance(command, (list,str)):
             raise ValueError('MCP server command must be an argument list')
         self.command, self.timeout = command, timeout
+        self.env = env
 
     async def _request(self, name, params):
         with tempfile.TemporaryFile(mode='w+',encoding='utf-8') as errlog:
@@ -28,7 +29,7 @@ class McpWorker:
                         if reply.isError:
                             raise UncertainSubmission('MCP tool error; reconcile original job')
                         return reply.structuredContent if reply.structuredContent is not None else json.loads(next(c.text for c in reply.content if c.type=='text'))
-        server = StdioServerParameters(command=self.command[0],args=self.command[1:])
+        server = StdioServerParameters(command=self.command[0],args=self.command[1:],env=self.env)
         async with asyncio.timeout(self.timeout):
             async with stdio_client(server,errlog=errlog) as (read, write):
                 async with ClientSession(read, write) as session:

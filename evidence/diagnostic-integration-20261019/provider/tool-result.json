@@ -1,0 +1,31 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "tool_calling": "verified",
+  "vision": "unknown",
+  "observed_at": "2026-10-19T14:34:44.553316+00:00",
+  "usage": {
+    "model": "deepseek-flash",
+    "status": "succeeded",
+    "retry_count": 0,
+    "usage": {
+      "prompt_tokens": 290,
+      "completion_tokens": 34,
+      "total_tokens": 324
+    },
+    "cost": 0.0001278,
+    "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "probe": true,
+    "budget_scope": "default",
+    "http_status": 200,
+    "duration_seconds": 1.2066150000027847,
+    "actual_model": "deepseek-flash",
+    "currency": "USD"
+  },
+  "scope": "single endpoint/configuration probe; no user files; no tool execution",
+  "status": "completed",
+  "kind": "tool",
+  "profile_hash": "38075d3d8ef0aeff72400abf58077b66694773047dcfb2c3bcd4a93cfad4f736",
+  "retry_count": 0,
+  "cost_note": "Peak/cache-miss rate estimate, not an invoice"
+}

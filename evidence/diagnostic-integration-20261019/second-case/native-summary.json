@@ -1,0 +1,25 @@
+{
+  "software": "ENVI",
+  "version": "5.6",
+  "readback_equal": true,
+  "shape": [
+    64,
+    64,
+    3
+  ],
+  "pixel_differences": 0,
+  "source_sha256": "47ab7191fa82b78795269082f1de33fd38cf6e20679dc90ed3e3a87c57f49688",
+  "scope": "second user RGB image input/crop validation only; no independent semantic accuracy",
+  "crs": "unknown",
+  "physical_scale": "unknown",
+  "checks": [
+    {
+      "check_id": "native-readback",
+      "passed": true
+    },
+    {
+      "check_id": "rgb-pixel-equality",
+      "passed": true
+    }
+  ]
+}

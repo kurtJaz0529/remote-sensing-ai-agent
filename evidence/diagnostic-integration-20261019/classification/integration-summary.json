@@ -1,0 +1,149 @@
+{
+  "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+  "state": "Completed",
+  "plan_sha256": "4a8901c793ff229c946919aa5756d4023b3891e5b9f25d06adc72aade721071e",
+  "input_manifest_hash": "55684478dbdf789c347d157a6d936b85511794c71500c5ff706fe624c0f5a32d",
+  "originals_unchanged": true,
+  "steps": [
+    {
+      "step_id": "S1",
+      "job_id": "JOB-c71cdbd04ebf95e2fb9ef02760e2aacc",
+      "state": "succeeded",
+      "software": {
+        "name": "ENVI",
+        "version": "5.6"
+      },
+      "checks": [
+        {
+          "check_id": "native-readback",
+          "passed": true
+        },
+        {
+          "check_id": "sample-buffer",
+          "passed": true
+        },
+        {
+          "check_id": "native-gaussian-match",
+          "passed": true
+        },
+        {
+          "check_id": "diagnostic-matrix",
+          "passed": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "ART-06480978aa35b11169ef8698",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/diagnostic-metrics.json",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "12c23af5797e4935af02f928577127c32e4e0603ccddd02c130a07e60644abb3",
+          "size": 2917,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-d7f79889ef23f2e96b69940d",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/effective-parameters.json",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "f83583fd7b55a8bd38f222ceaf054b7f026457d7f201c1f767e182ea50223e49",
+          "size": 7982,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-9e0ad2e44ed76d171c3ed78a",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/majority.dat",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "f619492b66105785064dd508826e33a212ed0ce4c2b6c0bdd3f30b72e5608b24",
+          "size": 256000,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-faa7fc22caac5fbae0afa8b0",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/majority.hdr",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "18bb5bd84e2bcbf040460069d8b4ca896dbe8908f3a90126e82de56202fb337c",
+          "size": 380,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-296db9535fe30a5087b33790",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/maximum-likelihood.dat",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "97d87b30c1898f9f1fde95a933b16666b679969743e3aa61a9840fae8215da4f",
+          "size": 256000,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-4f3020799737ae87511f3aaa",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/maximum-likelihood.hdr",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "18bb5bd84e2bcbf040460069d8b4ca896dbe8908f3a90126e82de56202fb337c",
+          "size": 380,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-d0e66ce5c5e52be9dd51cb5e",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/native-reference-check.json",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "ba725be5a1aea5c7061fd775e9c3f9ae3b539d123e2b8fc5215c4f64f2d24466",
+          "size": 149,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-b8c1a73d79da081b7ab8f1c6",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/rules.dat",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "a59f9d11d843d6648fc7aa3b330de7a1e9b26b7440ca0d8b08967319cd23291a",
+          "size": 6144000,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-717387131ec67b8016e7f375",
+          "kind": "data",
+          "relative_path": "artifacts/S1/native/rules.hdr",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "05d069b207a1122d34477122f1b07c9dca51176959c0da35ad57d6e89281e1d5",
+          "size": 264,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-ebc4fa7ed4835b0bb38d96a8",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/sample-audit.json",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "9f1f29969f7a7448778f9b4668f5a9813b57e4403026959012e96dc4f3757d23",
+          "size": 4403,
+          "step_id": "S1",
+          "verified": true
+        },
+        {
+          "artifact_id": "ART-599b0274948dc5af76beb64e",
+          "kind": "check",
+          "relative_path": "artifacts/S1/native/summary.json",
+          "run_id": "RUN-e092b96f272e4415bb5eea661ce1285e",
+          "sha256": "91daab7d6cc1b0d4f20efc8dab3fcb8cb6b0ba12a7d4b5f2f61160530214db77",
+          "size": 837,
+          "step_id": "S1",
+          "verified": true
+        }
+      ],
+      "error": null
+    }
+  ]
+}

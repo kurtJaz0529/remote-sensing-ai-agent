@@ -2,7 +2,7 @@
 
 Windows 本地遥感实验 Agent：通过 DeepSeek/GPT 规划任务，调用本机 ENVI、MATLAB 和 ArcGIS Pro，保存可追溯的处理结果、真实截图、工程/复现包及报告。
 
-**当前状态：基于云端 `0.1.0.dev1`，本地集成预览为 `0.1.0.dev2`。三软件固定案例已通过MCP与统一worker完成真实处理验证；完整分类实验、截图、报告与独立验收尚未完成。后续软件交互只使用MCP，见 [MCP接入约定](docs/MCP_ONLY.md)。**
+**当前为 `0.1.0.dev3` 本地集成预览。三软件最小处理、ENVI 原生分类诊断与第二幅 RGB 影像读取均已通过 MCP 验证；ENVI Classic 有三张原始诊断截图，DeepSeek 工具与合成图视觉探针通过。完整实验报告、合格 ROI 和独立保留验收尚未完成。** 当前结果与任务边界见 [最新交付](docs/DIAGNOSTIC_INTEGRATION_20261019.md)，软件入口见 [MCP接入约定](docs/MCP_ONLY.md)。
 
 本仓库由本地 Codex 与 Antigravity 持续协作，云端 Codex 后续承接补充开发或独立评审。欢迎其他贡献者通过 Fork / Pull Request 提交代码和文件；仓库写权限由所有者按 GitHub 账号授予。
 
@@ -15,7 +15,7 @@ Windows 本地遥感实验 Agent：通过 DeepSeek/GPT 规划任务，调用本�
 
 ## 已交付的核心基线
 
-基于 Notion《AI 遥感本地 Agent｜三成员协作与Notion任务计划 v1.1》。本包交付协议、模型接口、需求提取、计划确认、SQLite编排、离线检索和交接检查的可运行实现。**这是云端开发预览，尚不是三软件可用的产品发布。**
+基于 Notion《AI 遥感本地 Agent｜三成员协作与Notion任务计划 v1.1》。本包包含协议、模型接口、需求提取、计划确认、SQLite 编排、MCP worker、固定案例软件适配、候选方法和核验组件。当前发布物是开发预览，正式产品验收保持待完成。
 
 ## 安装
 
@@ -23,7 +23,7 @@ Python 3.11+，建议使用独立虚拟环境。原云端测试环境为 Linux /
 
 ```powershell
 py -3.11 -m venv .venv
-.venv\Scripts\python -m pip install ".[documents]"
+.venv\Scripts\python -m pip install ".[mcp,science,documents]"
 .venv\Scripts\rsagent doctor
 .venv\Scripts\python -m unittest discover -s tests -v
 ```
@@ -69,7 +69,7 @@ probe 只发送一个小工具调用请求并记录实际模型/用量，成功�
 
 ## 知识和经验
 
-检索先按软件/版本、许可、产品、格式过滤，再做精确匹配与 FTS5。候选仅显式研究查询可见，返回来源、限制、冲突、状态。版本范围使用 PEP440（如 `>=5.6,<5.7`）；MATLAB发行版使用 `exact:R2024a`。当前目录里没有已发布遥感知识或经验；研究和本机验证由 T05/T06 等交付后接入。
+检索先按软件/版本、许可、产品、格式过滤，再做精确匹配与 FTS5。候选仅显式研究查询可见，返回来源、限制、冲突、状态。版本范围使用 PEP440（如 `>=5.6,<5.7`）；MATLAB发行版使用 `exact:R2024a`。已集成 39 条候选来源、21 张候选知识卡及 10 条候选经验；发布区为空。8 项 Skill 目录的路由结果只是候选建议，不能授权执行。未实现的适配入口仍保留待验证状态。
 
 ```text
 rsagent knowledge-import snapshot.json --index knowledge.sqlite --reviewed-evidence-root <已复核真实run目录>
@@ -83,4 +83,4 @@ rsagent audit-bundle <run目录>
 
 原云端批次任务/验收逐项见 [COVERAGE.md](docs/COVERAGE.md)，成员接入见 [HANDOFF.md](docs/HANDOFF.md)，协议见 contracts/ 与 examples/。`releases/release_manifest.json` 是原云端包的历史清单，不是后续 Git 提交的实时清单；校验方式见 [IMPORT.md](docs/IMPORT.md)。GitHub 保存源码版本，Notion 是任务与交接入口，真实实验状态属于用户本地 SQLite。
 
-尚未验证：真实 DeepSeek/GPT API、T08本机worker、ENVI/MATLAB/ArcGIS Pro、真实截图/工程、完整报告与真实用户案例。Windows核心单元/mock测试通过不等于这些能力已接通。CLI不会搜索或下载实验影像，也没有产品GUI。软件/工程/桌面锁、取消进程、软件隔离与许可检查需由本地worker实现；JSON-RPC客户端是本批交接传输协议，MCP桥接仍待本地/集成验证。
+本地 worker、三软件最小案例及 DeepSeek 两项探针已有真实证据。尚未验证：GPT 真实 API、完整自然语言自动规划、MATLAB/ArcGIS 真实窗口截图、完整实验报告与独立保留案例。训练样本最低 JM=1.1588，未通过指导书要求；诊断 OA=0.725 不代表新独立精度。CLI 不搜索或下载实验影像，也没有产品 GUI。候选方法中的重投影只校验请求，Cubic 明确拒绝；候选 DOCX 构建器仅生成技术预览，正式模板报告仍由完整证据工作流验收。

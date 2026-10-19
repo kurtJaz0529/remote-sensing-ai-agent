@@ -1,0 +1,12 @@
+{
+  "vision": "verified",
+  "expected": "red",
+  "response": "The image is a completely solid red square with no other details or features.",
+  "observed_at": "2026-10-19T14:34:46.770153+00:00",
+  "scope": "single endpoint/configuration probe; no user files; no tool execution",
+  "status": "completed",
+  "kind": "vision",
+  "profile_hash": "38075d3d8ef0aeff72400abf58077b66694773047dcfb2c3bcd4a93cfad4f736",
+  "retry_count": 0,
+  "cost_note": "Peak/cache-miss rate estimate, not an invoice"
+}

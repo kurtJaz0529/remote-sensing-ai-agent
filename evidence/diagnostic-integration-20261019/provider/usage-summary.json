@@ -1,0 +1,48 @@
+{
+  "request_count": 2,
+  "records": [
+    {
+      "actual_model": "deepseek-flash",
+      "budget_scope": "default",
+      "cost": 0.0001278,
+      "currency": "USD",
+      "duration_seconds": 1.2066150000027847,
+      "http_status": 200,
+      "model": "deepseek-flash",
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "probe": true,
+      "retry_count": 0,
+      "status": "succeeded",
+      "usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 290,
+        "total_tokens": 324
+      }
+    },
+    {
+      "actual_model": "deepseek-flash",
+      "budget_scope": "default",
+      "cost": 7.68e-05,
+      "currency": "USD",
+      "duration_seconds": 1.4990262999999686,
+      "http_status": 200,
+      "model": "deepseek-flash",
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "probe": true,
+      "retry_count": 0,
+      "status": "succeeded",
+      "usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 196,
+        "total_tokens": 211
+      }
+    }
+  ],
+  "estimated_cost_usd": 0.00020459999999999999,
+  "cost_basis": "Conservative peak/cache-miss estimate, not invoiced amount",
+  "fixture_sha256": "becf0cf30d6978325d9ccdea315923e2dbbf7e591c2857b92b5f82e41957bb98",
+  "user_imagery_transmitted": false,
+  "tool_proposals_executed": false,
+  "openai_real_api_status": "not_run; API key unavailable",
+  "initial_preflight_failure": "MCP minimal environment omitted credential; no HTTP request made; corrected with explicit process-only environment in revision 2"
+}

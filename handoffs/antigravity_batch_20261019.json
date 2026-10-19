@@ -1,0 +1,82 @@
+{
+  "schema_revision": "0.1.0",
+  "task_id": "T05-T06-T07-T12-T17-T18-T19-T20-T21-T22-T23-T26-T28-T29-T03_REVIEW",
+  "from_role": "gemini_antigravity",
+  "to_role": "cloud_codex_and_local_codex",
+  "status": "pending_independent_review_and_local_verification",
+  "spec_revision": "v1.1",
+  "base_version": "6d35a1c",
+  "artifact_manifest": "knowledge/candidates/candidate_snapshot.json",
+  "input_refs": [
+    "contracts/source.schema.json",
+    "contracts/knowledge.schema.json",
+    "contracts/experience.schema.json",
+    "contracts/task.schema.json",
+    "contracts/handoff.schema.json",
+    "retrieval/index.py",
+    "scripts/evaluate_retrieval.py",
+    "notion://3fec5fcc-8d93-81de-a5f1-f4764286ce47",
+    "notion://3fcc5fcc-8d93-8102-8310-efb0dae1ba37",
+    "notion://c19b4979bdc64db2a981423266271561"
+  ],
+  "changed_files": [
+    "knowledge/README.md",
+    "knowledge/sources/sources_catalog.json",
+    "knowledge/sources/research_questions.json",
+    "knowledge/candidates/knowledge_cards.json",
+    "knowledge/candidates/conflicts_and_errors.md",
+    "knowledge/candidates/experience_candidates.json",
+    "knowledge/candidates/candidate_snapshot.json",
+    "knowledge/published/README.md",
+    "skills/__init__.py",
+    "skills/README.md",
+    "skills/skill_schema.json",
+    "skills/loader.py",
+    "skills/catalog/skills_catalog.json",
+    "methods/__init__.py",
+    "methods/preprocess.py",
+    "methods/spectral.py",
+    "methods/classification.py",
+    "methods/postprocess.py",
+    "verification/__init__.py",
+    "verification/acceptance_matrix.json",
+    "verification/screenshot_spec.json",
+    "verification/dataset_audit.py",
+    "verification/classification_eval.py",
+    "verification/fault_scenarios.py",
+    "verification/retrieval_eval_questions.json",
+    "reports/__init__.py",
+    "reports/report_outline_spec.md",
+    "reports/report_builder.py",
+    "tests/test_antigravity_modules.py",
+    "handoffs/antigravity_batch_20261019.json",
+    "docs/ANTIGRAVITY_DELIVERY_20261019.md"
+  ],
+  "result_summary": [
+    "T05: Completed 36 structured sources across 9 domains (knowledge/sources/sources_catalog.json) and structured research questions with stopping rules (knowledge/sources/research_questions.json).",
+    "T06: Completed 18 candidate knowledge/method/parameter/error cards (knowledge/candidates/knowledge_cards.json), cross-software conflict guide (knowledge/candidates/conflicts_and_errors.md), and candidate index snapshot (sha256=fced69b2479d231d75fa1e75509d9e8a8c8d94723ee09e30f095b0a60e9ff76d).",
+    "T07: Completed R01-R12 acceptance matrix with 10 historical error cases (verification/acceptance_matrix.json), screenshot identity & honesty spec (verification/screenshot_spec.json), and 7-chapter report outline spec (reports/report_outline_spec.md).",
+    "T12: Completed client-neutral skill schema (skills/skill_schema.json), 8 foundational skills catalog (skills/catalog/skills_catalog.json), and capability router (skills/loader.py) respecting local T01 probe constraints.",
+    "T17: Implemented dataset and sample auditor (verification/dataset_audit.py) covering ENVI .hdr parsing, CRS/scale boundaries, cross-software class code mapping (codes 3/4/5 collision), and >=5px Chebyshev spatial buffer.",
+    "T18-T21: Implemented deterministic method packages for preprocessing (methods/preprocess.py), float64 spectral indices + isolated-fit PCA + Landsat 5 TM K-T transform (methods/spectral.py), Parallelepiped + regularized MLC + K-Means + split/merge-tracked ISODATA (methods/classification.py), and Majority + Clump + Sieve + water-loss branch comparator (methods/postprocess.py).",
+    "T22-T23: Implemented C x (C+1) asymmetric confusion matrix, PA/UA swap detector, and .shp/.dbf roundtrip verifier (verification/classification_eval.py), plus manifest-bound report auditor and DOCX/PDF builder (reports/report_builder.py).",
+    "T26, T28, T29: Implemented 10 executable fault-injection scenarios (verification/fault_scenarios.py, 10/10 passing), 10 candidate experience rules (knowledge/candidates/experience_candidates.json), and 12 isolated retrieval evaluation questions (verification/retrieval_eval_questions.json, 12/12 passing)."
+  ],
+  "validation": {
+    "static_or_mock": [
+      "python -X utf8 -m unittest discover -s tests -v (60/60 tests passed)",
+      "python -X utf8 scripts/evaluate_retrieval.py on verification/retrieval_eval_questions.json (12/12 passed)",
+      "verification.fault_scenarios.run_all_fault_scenarios() (10/10 fault-injection checks passed)"
+    ],
+    "real_software_run_ids": [],
+    "evidence_manifest": "knowledge/candidates/candidate_snapshot.json"
+  },
+  "limitations": [
+    "All knowledge cards (knowledge_cards.json) and experience rules (experience_candidates.json) remain at lifecycle='candidate' and local_verification_status='not_run' because real software execution bundles (runs/<run_id>/) must be produced by local_codex and independently reviewed by cloud_codex before promotion.",
+    "External software backends in skills/catalog/skills_catalog.json remain tagged as 'pending_local_tool_verification' until local_codex binds T14/T15/T16 adapters in end-to-end runs (T24/T25)."
+  ],
+  "open_questions": [
+    "Whether ENVI 5.6 classic MaximumLikelihoodClassification and ParallelepipedClassification should be invoked via IDL batch bridge by default in local_codex's T14 adapter when absent from envipyengine.tasks()."
+  ],
+  "next_action": "Request cloud_codex to independently review T05/T06/T07/T12/T17-T23/T26/T28/T29 deliverables, and local_codex to bind verification/, methods/, skills/, and reports/ into T24/T25 real local software runs."
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "SECONDARY-RGB-20261019",
+  "source_sha256": "47ab7191fa82b78795269082f1de33fd38cf6e20679dc90ed3e3a87c57f49688",
+  "native_task": "SubsetRaster",
+  "interleave": "bip",
+  "readback_equal": true,
+  "pixel_differences": 0,
+  "initial_failure": "reader assumed BSQ; native HDR correctly declares BIP",
+  "scope": "RGB pixel readback only; no new held-out classification accuracy"
+}

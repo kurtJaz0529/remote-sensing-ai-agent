@@ -1,0 +1,277 @@
+{
+  "schema_revision": "0.1.0",
+  "matrix_id": "ACCEPTANCE-MATRIX-R01-R12-V1",
+  "author_role": "gemini_antigravity",
+  "review_status": "candidate",
+  "requirements": [
+    {
+      "requirement_id": "R01",
+      "title": "自然语言任务理解与结构化契约生成",
+      "stage": "task-intake",
+      "target_modules": [
+        "skills/loader.py",
+        "contracts/task.schema.json",
+        "orchestrator/engine.py"
+      ],
+      "check_ids": [
+        "CHK-INTAKE-SCHEMA-001",
+        "CHK-INTAKE-EVAL-KIND-001"
+      ],
+      "acceptance_criteria": "输入遥感需求后生成符合 contracts/task.schema.json 的 Task Spec，显式声明 software_targets、evaluation_kind、input_files 与 class_schema。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R02",
+      "title": "多源权威知识检索与适用性前置过滤",
+      "stage": "knowledge-retrieval",
+      "target_modules": [
+        "retrieval/index.py",
+        "knowledge/sources/sources_catalog.json",
+        "knowledge/candidates/knowledge_cards.json"
+      ],
+      "check_ids": [
+        "CHK-RETRIEVAL-VERSION-001",
+        "CHK-RETRIEVAL-LICENSE-001",
+        "CHK-RETRIEVAL-ISOLATION-001"
+      ],
+      "acceptance_criteria": "检索前先按软件版本、工具箱许可（如 MATLAB 仅 Base License）、数据格式过滤；未完成本地验证的 candidate 卡片不得标记为 execution_eligible；评测题库严格隔离在运行时索引之外。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R03",
+      "title": "数据集元数据、空间参考、定标与样本空间缓冲审计",
+      "stage": "dataset-audit",
+      "target_modules": [
+        "verification/dataset_audit.py"
+      ],
+      "check_ids": [
+        "CHK-AUDIT-HDR-001",
+        "CHK-AUDIT-CRS-001",
+        "CHK-AUDIT-SCALE-001",
+        "CHK-CLASS-MAP-001",
+        "CHK-AUDIT-BUFFER-001"
+      ],
+      "acceptance_criteria": "自动解析 ENVI .hdr 与样本文件；无 CRS 时禁止物理面积单位（hm2/km2）外推；未验证缩放因子时禁止定标反射率声明；训练/测试像元重叠或 Chebyshev 距离 <5 像元时自动降级 evaluation_kind 并阻断独立泛化精度声明。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R04",
+      "title": "栅格预处理与分类图重采样插值保护",
+      "stage": "raster-preprocess",
+      "target_modules": [
+        "methods/preprocess.py"
+      ],
+      "check_ids": [
+        "CHK-PREPROC-CROP-001",
+        "CHK-PREPROC-RESAMPLE-CAT-001",
+        "CHK-PREPROC-STACK-001"
+      ],
+      "acceptance_criteria": "支持裁剪、重投影、重采样与波段堆栈；当 is_categorical=True（分类图或 ROI 掩膜）且插值方式为 bilinear/cubic 时必须直接拒绝执行，仅允许 nearest。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R05",
+      "title": "光谱指数、PCA 域隔离与 K-T 变换分量边界控制",
+      "stage": "spectral-transform",
+      "target_modules": [
+        "methods/spectral.py"
+      ],
+      "check_ids": [
+        "CHK-SPEC-FLOAT-001",
+        "CHK-SPEC-ZERO-DENOM-001",
+        "CHK-SPEC-PCA-LEAK-001",
+        "CHK-SPEC-KT-THIRD-001"
+      ],
+      "acceptance_criteria": "光谱计算前强制转 float64，防止 uint8 下溢；零分母像元写入 nodata=-9999.0 并输出掩膜；监督分类特征 PCA 仅允许在 train_split_only 上拟合；Landsat 5 TM K-T 变换第三分量固定命名为 Third (Wetness-related)。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R06",
+      "title": "非监督分类（K-Means 与 ISODATA 分裂/合并追踪）",
+      "stage": "unsupervised-classification",
+      "target_modules": [
+        "methods/classification.py"
+      ],
+      "check_ids": [
+        "CHK-CLASS-KMEANS-001",
+        "CHK-CLASS-ISO-001"
+      ],
+      "acceptance_criteria": "K-Means 支持确定性种子初始化与空簇处理；ISODATA 必须记录每次迭代的 split_events 与 merge_events，若全过程未触发分裂或合并（split_count==0 and merge_count==0），必须显式标记 degenerated_to_kmeans=True。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R07",
+      "title": "监督分类（最大似然协方差正则化与平行六面体多重落入消歧）",
+      "stage": "supervised-classification",
+      "target_modules": [
+        "methods/classification.py"
+      ],
+      "check_ids": [
+        "CHK-CLASS-MLC-001",
+        "CHK-CLASS-PP-001"
+      ],
+      "acceptance_criteria": "最大似然分类检查类内协方差条件数并在奇异时使用脊正则化；平行六面体分类必须显式指定 overlap_policy（first_class / min_standardized_distance / unclassified_on_overlap），并输出 overlap_ratio 与 unclassified_ratio。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R08",
+      "title": "分类后处理（Majority / Sieve / Clump）与细长水体损失告警",
+      "stage": "postprocess-and-evaluate",
+      "target_modules": [
+        "methods/postprocess.py"
+      ],
+      "check_ids": [
+        "CHK-POST-MODE-001",
+        "CHK-POST-WATER-LOSS-001"
+      ],
+      "acceptance_criteria": "支持 Majority、Sieve、Clump 多参数分支对比；严格区分 ENVI 原生 Sieve+Clump 与纯矩阵近似实现；统计各类别后处理前后像元面积变化，当水体等细长地物损失率超阈值（默认 15%）时触发 water_loss_warning。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R09",
+      "title": "独立分类精度验证、非对称混淆矩阵与栅格矢量一致性审计",
+      "stage": "postprocess-and-evaluate",
+      "target_modules": [
+        "verification/classification_eval.py"
+      ],
+      "check_ids": [
+        "CHK-EVAL-MATRIX-001",
+        "CHK-EVAL-PA-UA-001",
+        "CHK-EVAL-VEC-ROUNDTRIP-001"
+      ],
+      "acceptance_criteria": "在统一 semantic_id 空间构建 C x (C+1) 混淆矩阵（含 0=Unclassified 列）；准确计算 OA、Kappa、PA、UA 并内置 PA/UA 互换检测器；对分类图转矢量（.shp/.dbf）执行属性表与像元计数闭环核对。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R10",
+      "title": "运行证据链冻结、截图身份核验与 API/GUI 诚实表述",
+      "stage": "deliver-and-learn",
+      "target_modules": [
+        "verification/screenshot_spec.json",
+        "reports/report_builder.py",
+        "orchestrator/engine.py"
+      ],
+      "check_ids": [
+        "CHK-EVIDENCE-MANIFEST-001",
+        "CHK-SCREENSHOT-ID-001",
+        "CHK-REPORT-HONESTY-001"
+      ],
+      "acceptance_criteria": "所有报告数值、图层截图与表格必须绑定冻结的 run_id 与 SHA256；通过后台 API/批处理无头执行时，严禁在报告中伪造“点击菜单栏/弹出对话框”等 GUI 操作描述。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R11",
+      "title": "实验报告生成（DOCX/PDF）、表格列序语义校验与双签验证",
+      "stage": "deliver-and-learn",
+      "target_modules": [
+        "reports/report_builder.py",
+        "reports/report_outline_spec.md"
+      ],
+      "check_ids": [
+        "CHK-REPORT-DOCX-PDF-001",
+        "CHK-REPORT-TABLE-COL-001",
+        "CHK-EVAL-KIND-001"
+      ],
+      "acceptance_criteria": "支持从冻结 manifest 生成结构化报告与 DOCX（并校验 PDF 签名与非空页数）；强制校验对比表格列头与 semantic_id/branch_id 的映射一致（防止实验八表6列错位）；禁止未双人复核自签“已完成”。",
+      "blocking_on_failure": true
+    },
+    {
+      "requirement_id": "R12",
+      "title": "故障注入回归测试与候选经验规则双人晋升门禁",
+      "stage": "governance-and-learning",
+      "target_modules": [
+        "verification/fault_scenarios.py",
+        "knowledge/candidates/experience_candidates.json",
+        "retrieval/index.py"
+      ],
+      "check_ids": [
+        "CHK-FAULT-INJECTION-10",
+        "CHK-EXP-PROMOTION-GATE-001"
+      ],
+      "acceptance_criteria": "10 类强制故障注入场景（含历史实验全部典型失误）100% 被验证器捕获并给出结构化错误码；经验规则晋升必须绑定复现 run、修复对比 run、回归 run 与非作者 reviewer_role。",
+      "blocking_on_failure": true
+    }
+  ],
+  "historical_error_cases": [
+    {
+      "case_id": "HIST-ERR-01",
+      "source_archive": "MATLAB 实验报告归档 (3fcc5fcc-8d93-8102-8310-efb0dae1ba37)",
+      "error_name": "uint8_underflow_and_zero_division",
+      "description": "在 uint8 栅格上直接计算波段差值或归一化指数，导致负值截断为 0、零分母产生 NaN/Inf。",
+      "target_check_id": "CHK-SPEC-FLOAT-001",
+      "verifier_module": "verification.fault_scenarios"
+    },
+    {
+      "case_id": "HIST-ERR-02",
+      "source_archive": "MATLAB & ENVI 实验归档",
+      "error_name": "missing_crs_and_unverified_reflectance_scale",
+      "description": "can_tmr.hdr 缺失空间参考（map info）且像元值 0..100 未经定标元数据验证，报告却声称公顷/平方千米面积或已定标地表反射率。",
+      "target_check_id": "CHK-AUDIT-CRS-001",
+      "verifier_module": "verification.dataset_audit"
+    },
+    {
+      "case_id": "HIST-ERR-03",
+      "source_archive": "MATLAB 实验报告归档 (3fcc5fcc-8d93-8102-8310-efb0dae1ba37)",
+      "error_name": "kt_third_component_overclaimed_as_wetness",
+      "description": "将 Landsat 5 TM K-T 变换第三分量（Third）直接当作已定标绝对湿度（Wetness）下结论。",
+      "target_check_id": "CHK-SPEC-KT-THIRD-001",
+      "verifier_module": "reports.report_builder"
+    },
+    {
+      "case_id": "HIST-ERR-04",
+      "source_archive": "监督分类通用方法学边界",
+      "error_name": "pca_full_image_fit_leakage",
+      "description": "在包含测试样本的全图上拟合 PCA 均值与主成分载荷矩阵，再在同一测试集上报告独立泛化精度。",
+      "target_check_id": "CHK-SPEC-PCA-LEAK-001",
+      "verifier_module": "verification.fault_scenarios"
+    },
+    {
+      "case_id": "HIST-ERR-05",
+      "source_archive": "栅格预处理通用规范",
+      "error_name": "categorical_raster_bilinear_cubic_resampling",
+      "description": "对分类结果图或 ROI 类别掩膜使用双线性（bilinear）或三次卷积（cubic）重采样，产生伪造的中间类别编码。",
+      "target_check_id": "CHK-PREPROC-RESAMPLE-CAT-001",
+      "verifier_module": "methods.preprocess"
+    },
+    {
+      "case_id": "HIST-ERR-06",
+      "source_archive": "MATLAB & ENVI 实验归档",
+      "error_name": "resubstitution_or_diagnostic_reported_as_independent_accuracy",
+      "description": "将训练样本回代精度、无空间缓冲的同源多边形切分精度或同批 200 点迭代修订后的诊断精度（73.50%）表述为独立样本真实泛化精度。",
+      "target_check_id": "CHK-EVAL-KIND-001",
+      "verifier_module": "verification.dataset_audit"
+    },
+    {
+      "case_id": "HIST-ERR-07",
+      "source_archive": "ENVI 实验八归档 (c19b4979bdc64db2a981423266271561) 表4/表5",
+      "error_name": "confusion_matrix_pa_ua_swap_and_unclassified_omission",
+      "description": "混淆矩阵行/列方向互换导致制图精度（PA）与用户精度（UA）顛倒，或漏算 0=Unclassified 列导致 PA 虚高。",
+      "target_check_id": "CHK-EVAL-PA-UA-001",
+      "verifier_module": "verification.classification_eval"
+    },
+    {
+      "case_id": "HIST-ERR-08",
+      "source_archive": "ENVI 实验八归档 (c19b4979bdc64db2a981423266271561) 表6",
+      "error_name": "postprocess_table_column_swap_and_water_loss",
+      "description": "后处理对比表（表6）中 ML_Clump 与 ML_Sieve 或建设用地与水域列错位，且 3x3 Majority/Clump 吞噬细长河流（水体 PA 从 92.54% 跌至 69.40%）未告警。",
+      "target_check_id": "CHK-REPORT-TABLE-COL-001",
+      "verifier_module": "reports.report_builder"
+    },
+    {
+      "case_id": "HIST-ERR-09",
+      "source_archive": "跨软件分类对比归档",
+      "error_name": "cross_software_class_code_mismatch",
+      "description": "MATLAB（3=建设用地,4=水域,5=裸地）与 ENVI 实验八（3=裸地,4=建设用地,5=水域）原始类别编码不一致，未作语义对齐直接对比。",
+      "target_check_id": "CHK-CLASS-MAP-001",
+      "verifier_module": "verification.dataset_audit"
+    },
+    {
+      "case_id": "HIST-ERR-10",
+      "source_archive": "MATLAB 实验报告归档 (3fcc5fcc-8d93-8102-8310-efb0dae1ba37)",
+      "error_name": "isodata_without_split_merge_and_parallelepiped_silent_overwrite",
+      "description": "自写 ISODATA 未触发任何分裂/合并实质退化为 K-Means 却声称完成动态聚类；平行六面体多重落入像元按循环顺序静默覆盖。",
+      "target_check_id": "CHK-CLASS-ISO-001",
+      "verifier_module": "methods.classification"
+    }
+  ]
+}

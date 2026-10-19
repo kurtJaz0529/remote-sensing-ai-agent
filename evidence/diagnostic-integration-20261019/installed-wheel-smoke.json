@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0.dev3",
+  "python": "3.13.7",
+  "isolated_installed_imports": true,
+  "mcp_handshake": true,
+  "mcp_tools": [
+    "registered_input_audit",
+    "run_cancel",
+    "run_status",
+    "workflow_submit"
+  ],
+  "package_resources": true,
+  "arithmetic_and_report_guard_smoke": true,
+  "scope": "Fresh virtual environment installed wheel smoke; no native software or remote API invocation"
+}

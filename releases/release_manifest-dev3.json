@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0.dev3",
+  "artifact": "rsagent_cloud_core-0.1.0.dev3-py3-none-any.whl",
+  "sha256": "1357db66bd3677fa47bbc9d7bb9d6daa6fab075b0fa1e77dc8d1783c127a87ca",
+  "size": 106869,
+  "schema_revision": "0.1.0",
+  "mcp_sdk": "1.28.1",
+  "wheel_content_check": "passed",
+  "source_tests": "evidence/diagnostic-integration-20261019/source-tests.json",
+  "installed_smoke": "evidence/diagnostic-integration-20261019/installed-wheel-smoke.json",
+  "validation_scope": "MCP fixed-case integration and candidate component preview; no complete lab or independent acceptance"
+}
