@@ -1,0 +1,35 @@
+{
+  "schema_revision": "0.1.0",
+  "environment_id": "NOT-PROBED",
+  "verified_at": "2026-10-19T00:00:00+00:00",
+  "tools": [
+    {
+      "tool": {
+        "schema_revision": "0.1.0",
+        "name": "mock.echo",
+        "version": "0.1.0",
+        "description": "Write a synthetic protocol marker; no remote sensing computation",
+        "side_effects": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        "implementation_kind": "mock"
+      },
+      "status": "unknown",
+      "verification_run_ids": [],
+      "limitations": [
+        "example is not a real software capability"
+      ]
+    }
+  ]
+}

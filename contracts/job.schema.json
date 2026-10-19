@@ -1,0 +1,97 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_revision": {
+      "const": "0.1.0"
+    },
+    "job_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "step_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plan_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "approval_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "dataset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "input_manifest_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "output_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "implementation_kind": {
+      "enum": [
+        "native",
+        "reimplementation",
+        "approximation",
+        "mock"
+      ]
+    }
+  },
+  "required": [
+    "schema_revision",
+    "job_id",
+    "project_id",
+    "run_id",
+    "step_id",
+    "plan_revision",
+    "approval_id",
+    "tool",
+    "tool_version",
+    "parameters",
+    "dataset_ids",
+    "input_manifest_hash",
+    "output_dir",
+    "timeout_seconds",
+    "idempotency_key",
+    "implementation_kind"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rsagent:job:0.1.0"
+}

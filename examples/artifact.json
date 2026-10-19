@@ -1,0 +1,11 @@
+{
+  "schema_revision": "0.1.0",
+  "artifact_id": "ART-EXAMPLE",
+  "run_id": "RUN-EXAMPLE",
+  "step_id": "S1",
+  "kind": "data",
+  "relative_path": "artifacts/S1/mock.txt",
+  "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "size": 1,
+  "verified": false
+}

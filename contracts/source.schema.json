@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_revision": {
+      "const": "0.1.0"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "enum": [
+        "official",
+        "paper",
+        "community",
+        "local_observation",
+        "model_candidate"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "software_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "access_scope": {
+      "enum": [
+        "full_text",
+        "abstract",
+        "metadata",
+        "local_help"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "candidate",
+        "verified",
+        "rejected"
+      ]
+    },
+    "snapshot_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schema_revision",
+    "source_id",
+    "title",
+    "source_type",
+    "url",
+    "locator",
+    "software_version",
+    "retrieved_at",
+    "access_scope",
+    "review_status",
+    "snapshot_sha256"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rsagent:source:0.1.0"
+}

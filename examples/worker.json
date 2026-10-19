@@ -1,0 +1,10 @@
+{
+  "command": [
+    "REPLACE_WITH_SOFTWARE_PYTHON",
+    "-m",
+    "your_local_worker",
+    "--runtime-root",
+    "REPLACE_WITH_LOCAL_RUNTIME"
+  ],
+  "timeout_seconds": 30
+}

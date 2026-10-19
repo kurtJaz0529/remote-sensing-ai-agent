@@ -1,0 +1,22 @@
+{
+  "schema_revision": "0.1.0",
+  "job_id": "JOB-EXAMPLE",
+  "project_id": "TASK-DEMO",
+  "run_id": "RUN-EXAMPLE",
+  "step_id": "S1",
+  "plan_revision": 1,
+  "approval_id": "APR-EXAMPLE-NOT-VALID",
+  "tool": "mock.echo",
+  "tool_version": "0.1.0",
+  "parameters": {
+    "message": "synthetic"
+  },
+  "dataset_ids": [
+    "SYNTHETIC-DATA"
+  ],
+  "input_manifest_hash": "07f2e53c448a1ff1804b8da02da7186e878672032cd4a026b5799d2eb0820955",
+  "output_dir": "artifacts/S1",
+  "timeout_seconds": 30,
+  "idempotency_key": "1111111111111111111111111111111111111111111111111111111111111111",
+  "implementation_kind": "mock"
+}

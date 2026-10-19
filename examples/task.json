@@ -1,0 +1,58 @@
+{
+  "schema_revision": "0.1.0",
+  "task_id": "TASK-DEMO",
+  "revision": 1,
+  "objective": "MOCK ONLY: exercise confirmation, dispatch and evidence gates",
+  "input_manifest_hash": "07f2e53c448a1ff1804b8da02da7186e878672032cd4a026b5799d2eb0820955",
+  "requirements": [
+    {
+      "requirement_id": "REQ-DEMO",
+      "source_locator": "synthetic protocol fixture",
+      "description": "Create a mock marker",
+      "required_artifacts": [
+        "data"
+      ],
+      "acceptance_checks": [
+        "mock-nonempty"
+      ],
+      "confidence": 1.0
+    }
+  ],
+  "method_plan": [
+    {
+      "step_id": "S1",
+      "depends_on": [],
+      "tool": "mock.echo",
+      "tool_version": "0.1.0",
+      "parameters": {
+        "message": "protocol-test"
+      },
+      "dataset_ids": [
+        "SYNTHETIC-DATA"
+      ],
+      "output_dir": "artifacts/S1",
+      "timeout_seconds": 30,
+      "implementation_kind": "mock",
+      "required_kinds": [
+        "data"
+      ]
+    }
+  ],
+  "required_deliverables": [
+    "data"
+  ],
+  "assumptions": [
+    "No software or scientific result is being validated"
+  ],
+  "open_questions": [],
+  "conflicts": [],
+  "evaluation_kind": "unknown",
+  "frozen_versions": {
+    "contracts": "0.1.0"
+  },
+  "budget": {
+    "max_tool_calls": 3,
+    "max_identical_error_retries": 1,
+    "model_cost_limit": null
+  }
+}

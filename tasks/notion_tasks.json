@@ -1,0 +1,72 @@
+[
+  {
+    "task_id": "T03",
+    "title": "公共协议、项目目录与交接规范",
+    "dependencies": "无；吸收T01/T02",
+    "acceptance": "schema验证示例、文件所有权与需求范围",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d93817f92dfc0390912442d"
+  },
+  {
+    "task_id": "T04",
+    "title": "DeepSeek/GPT模型适配",
+    "dependencies": "T03",
+    "acceptance": "真实API小请求与mock异常分开；解析失败不执行",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d9381d28110f7a970152c77"
+  },
+  {
+    "task_id": "T13",
+    "title": "知识校验与离线检索",
+    "dependencies": "T03、T05",
+    "acceptance": "适用性硬过滤；来源/状态返回；候选隔离",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d938180b873dc43847b7a48"
+  },
+  {
+    "task_id": "T14",
+    "title": "需求解析、计划revision与确认",
+    "dependencies": "T03、T07、T13",
+    "acceptance": "来源可追溯、冲突显式、未确认不可执行",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d9381008847db78fe26db45"
+  },
+  {
+    "task_id": "T15",
+    "title": "持久化编排、预算与恢复",
+    "dependencies": "T03、T04、T08协议",
+    "acceptance": "mock故障/重复提交/中断；无证据不完成",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d938172ad0ac657271f0232"
+  },
+  {
+    "task_id": "T25",
+    "title": "首案例独立验收",
+    "dependencies": "T24",
+    "acceptance": "真实证据包独立审查",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d938164a4fde416d4044a94"
+  },
+  {
+    "task_id": "T28",
+    "title": "经验晋级与撤回",
+    "dependencies": "T13、T25",
+    "acceptance": "验证run门控、版本回退",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d9381a09287cd27daa2ad4c"
+  },
+  {
+    "task_id": "T29",
+    "title": "检索评测",
+    "dependencies": "T06、T13、T25",
+    "acceptance": "固定题集与保留答案隔离",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d938180b247e9f25c948e90"
+  },
+  {
+    "task_id": "T30",
+    "title": "第二案例独立评审",
+    "dependencies": "T18/T19、T23、T26–T28",
+    "acceptance": "用户保留数据验收",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d93817983ddd73bd903c260"
+  },
+  {
+    "task_id": "T31",
+    "title": "集成版本与安装说明",
+    "dependencies": "T09–T11、T25–T30",
+    "acceptance": "本机签验及干净目录可运行",
+    "notion_url": "https://app.notion.com/p/3fec5fcc8d938100bf32f290dfe7bb76"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "schema_revision": "0.1.0",
+  "provider": "deepseek",
+  "base_url": "https://api.deepseek.com",
+  "model": "REPLACE_WITH_ACTUAL_SUPPORTED_MODEL",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "timeout_seconds": 30,
+  "context_tokens": 8192,
+  "tool_calling": "unknown",
+  "vision": "unknown",
+  "extra_body": {},
+  "pricing": null
+}

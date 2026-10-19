@@ -1,0 +1,1 @@
+{"approval":"APR-cdbe0b85c0114457beed3d20320bdb5a","calls":1,"created":"2026-10-19T12:46:27.106978+00:00","id":"RUN-8eec014332514f5ebc4e019fabd44812","mode":"mock","revision":1,"state":"Completed","steps":[{"error":null,"id":"S1","job":"JOB-4aace1c5cebffa888132edb7bf2edb48","state":"succeeded"}],"task":"TASK-DEMO","validation_scope":"mock_only"}

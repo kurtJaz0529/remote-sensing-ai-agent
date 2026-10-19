@@ -1,0 +1,166 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_revision": {
+      "const": "0.1.0"
+    },
+    "knowledge_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "source_locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "software": {
+      "type": "string",
+      "minLength": 1
+    },
+    "software_version_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sensor_product_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "required_licenses": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "input_formats": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "preconditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "implementation_kind": {
+      "enum": [
+        "native",
+        "reimplementation",
+        "approximation"
+      ]
+    },
+    "source_review_status": {
+      "enum": [
+        "candidate",
+        "verified",
+        "rejected"
+      ]
+    },
+    "local_verification_status": {
+      "enum": [
+        "not_run",
+        "verified",
+        "invalid"
+      ]
+    },
+    "verification_run_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "conflicts_with": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "reviewer_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lifecycle": {
+      "enum": [
+        "candidate",
+        "published",
+        "withdrawn"
+      ]
+    }
+  },
+  "required": [
+    "schema_revision",
+    "knowledge_id",
+    "revision",
+    "kind",
+    "claim",
+    "source_ids",
+    "source_locator",
+    "software",
+    "software_version_scope",
+    "sensor_product_scope",
+    "required_licenses",
+    "input_formats",
+    "preconditions",
+    "limitations",
+    "implementation_kind",
+    "source_review_status",
+    "local_verification_status",
+    "verification_run_ids",
+    "conflicts_with",
+    "reviewer_role",
+    "lifecycle"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rsagent:knowledge:0.1.0"
+}

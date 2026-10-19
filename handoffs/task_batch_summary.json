@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-19",
+  "role": "cloud_codex",
+  "version": "0.1.0.dev1",
+  "tasks": {
+    "T03": {
+      "status": "待复核",
+      "summary": "交付0.1.0.dev1公共协议：13类JSON Schema与14个有效示例、R01–R12清单、AGENTS/所有权、worker/handoff规范及可安装源码包。",
+      "files": [
+        "contracts/",
+        "examples/",
+        "AGENTS.md",
+        "project_manifest.yaml",
+        "docs/WORKER_PROTOCOL.md",
+        "handoffs/"
+      ],
+      "limits": "待本地Codex/Gemini复核公共接口，吸收T01/T02实测结果；JSON-RPC协议不是已接通的三软件MCP。",
+      "next": "本地Codex依协议实现T08；Gemini按source/knowledge及check ID接入。"
+    },
+    "T04": {
+      "status": "待验证",
+      "summary": "实现DeepSeek/GPT Chat Completions适配、工具/视觉探针、严格参数批次校验、错误分类、持久用量与跨模型费用账本；调用建议不直接执行。",
+      "files": [
+        "orchestrator/providers.py",
+        "examples/openai.provider.json",
+        "examples/deepseek.provider.json"
+      ],
+      "limits": "云端运行配置没有secret绑定，未执行真实API小请求；工具/视觉能力仍unknown。未覆盖Responses/流式及专用推理历史。",
+      "next": "在配置凭据的本机环境分别运行小请求与视觉探针，保存无密钥的probe结果；模型切换沿用run ID。"
+    },
+    "T13": {
+      "status": "待验证",
+      "summary": "实现来源/知识schema校验、候选隔离、SQLite FTS5和精确匹配、软件版本/许可/产品/格式硬过滤、来源/冲突返回及离线快照校验。",
+      "files": [
+        "retrieval/index.py",
+        "contracts/knowledge.schema.json",
+        "contracts/source.schema.json"
+      ],
+      "limits": "T05/T06真实知识与已复核本机证据未提交；发布知识库为空。构造证据仅在tests，不能当作实际知识通过。",
+      "next": "Gemini提交候选卡片；本地Codex提供对应真实run证据，云端复核后导入发布快照。"
+    },
+    "T14": {
+      "status": "待验证",
+      "summary": "实现TXT/MD、DOCX正文/表格、PDF文本提取与来源位置/缺口，结构化需求交付/check矩阵，计划revision/输入hash/approval绑定及冲突/未知阻断。",
+      "files": [
+        "orchestrator/intake.py",
+        "orchestrator/engine.py",
+        "contracts/task.schema.json"
+      ],
+      "limits": "部分实现：不含OCR、图片公式理解和自动语义冲突判定；自然语言自动规划循环尚未连接；待T07/真实材料联调。",
+      "next": "用T07需求矩阵和用户真实材料复核提取结果，明确图片/附件缺项后生成并确认计划。"
+    },
+    "T15": {
+      "status": "待验证",
+      "summary": "实现SQLite状态与事件、步骤依赖、工具参数门、提交前幂等持久化、超时/中断查询、预算、暂停取消、产物与验收check完成门、JSON-RPC客户端。",
+      "files": [
+        "orchestrator/engine.py",
+        "orchestrator/store.py",
+        "orchestrator/worker.py",
+        "orchestrator/mock_worker.py"
+      ],
+      "limits": "mock和子进程协议通过；T08真实worker及软件/工程/桌面锁、进程取消待本地实现/验证；无MCP桥接。默认不自动重试副作用步骤。",
+      "next": "本地按T08协议提供持久化worker，故障注入验证真实软件中断、未知job和取消；禁止unknown时自动重跑。"
+    },
+    "T25": {
+      "status": "阻塞",
+      "summary": "准备证据包完整性审计入口与需求check门；尚未执行首个真实实验独立验收。",
+      "files": [
+        "orchestrator/evidence.py",
+        "docs/COVERAGE.md"
+      ],
+      "limits": "T24真实run、原生输出/工程、截图、报告和独立检查证据均未提供；文件哈希检查不能代替科学验收。",
+      "next": "本地Codex提交T24证据包及manifest/计划/评价口径，云端逐需求给独立结论。"
+    },
+    "T28": {
+      "status": "待验证",
+      "summary": "实现版本化经验候选→复现→修复验证→回归/独立审查→发布/撤回门；默认无启用规则，撤回保留历史并允许新候选。",
+      "files": [
+        "retrieval/experience.py",
+        "contracts/experience.schema.json"
+      ],
+      "limits": "构造生命周期验证通过；缺T25真实事件/修复对照、真实回归与Gemini规则复核；没有已发布经验或提升结论。",
+      "next": "从真实失败run收集限定条件与反例，提交修复对照/回归证据并由Gemini审规则后再发布。"
+    },
+    "T29": {
+      "status": "阻塞",
+      "summary": "交付独立检索评测脚本；单元测试覆盖版本、来源、冲突、候选、撤回和保留答案隔离。正式检索题集评测尚未执行。",
+      "files": [
+        "scripts/evaluate_retrieval.py",
+        "tests/test_core.py"
+      ],
+      "limits": "T06正式题目/预期来源和T25反馈未提供，构造测试不代表遥感知识能力考试通过。",
+      "next": "Gemini在运行知识库之外提交正式题集；云端针对固定知识快照执行评测，保留题目/答案不导入索引。"
+    },
+    "T30": {
+      "status": "阻塞",
+      "summary": "明确第二案例云端独立评审的证据要求；尚未收到真实案例，未执行保留验收。",
+      "files": [
+        "docs/HANDOFF.md",
+        "orchestrator/evidence.py"
+      ],
+      "limits": "第二个用户/预留数据案例以及T18/T19、T23、T26–T28结果未提供，不能推断泛化或知识提升。",
+      "next": "本地Codex完成第二案例并交独立证据包；云端评审基线/更新版与未见数据结果。"
+    },
+    "T31": {
+      "status": "待验证",
+      "summary": "交付固定0.1.0.dev1开发预览：源码、wheel、完整哈希清单、安装配置/能力限制/恢复说明及干净虚拟环境测试证据。",
+      "files": [
+        "releases/",
+        "requirements-lock.txt",
+        "README.md",
+        "docs/",
+        "evidence/"
+      ],
+      "limits": "仅云端核心开发预览；Windows、真实API、三软件连接、T25–T30和本地签验未完成，不宣告产品首版发布。",
+      "next": "本地安装wheel并执行协议demo，逐软件真实接入后补签验；后续按release manifest接收其他成员产物。"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project": "AI遥感本地Agent",
+  "version": "0.1.0.dev1",
+  "spec_revision": "v1.1",
+  "schema_revision": "0.1.0",
+  "scope": "cloud_core_development_preview",
+  "runtime": "single local coordinator / SQLite / Python CLI",
+  "requirements": {
+    "R01": "Windows CLI; no product GUI",
+    "R02": "DeepSeek/GPT adapter; actual model capabilities probed",
+    "R03": "native ENVI/MATLAB/ArcGIS Pro via isolated local workers",
+    "R04": "registered user-provided data only",
+    "R05": "technical research separated from experiment inputs",
+    "R06": "revision approval, budgets, persistent recovery",
+    "R07": "real screenshots linked to current artifacts",
+    "R08": "data, native project/reproducible package, DOCX/PDF and evidence",
+    "R09": "versioned knowledge, skills and methods",
+    "R10": "validated experience, regression and withdrawal",
+    "R11": "three roles, Notion task/handoff collaboration",
+    "R12": "Gemini/Antigravity is one research/development member"
+  },
+  "ownership": {
+    "cloud_codex": ["contracts", "orchestrator", "retrieval", "tasks", "handoffs", "releases"],
+    "local_codex": ["adapters", "local worker", "real software evidence"],
+    "gemini_antigravity": ["knowledge", "skills", "methods", "verification", "reports"]
+  },
+  "out_of_scope": ["product GUI", "imagery search/download", "GitHub collaboration", "distributed compute", "model fine-tuning"],
+  "release_gate": "not met: real API, Windows, three-software connections and T25-T30 evidence pending"
+}

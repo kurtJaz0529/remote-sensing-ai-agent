@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_revision": {
+      "const": "0.1.0"
+    },
+    "provider": {
+      "enum": [
+        "openai",
+        "deepseek"
+      ]
+    },
+    "base_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_key_env": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "context_tokens": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tool_calling": {
+      "enum": [
+        "unknown",
+        "verified",
+        "unsupported"
+      ]
+    },
+    "vision": {
+      "enum": [
+        "unknown",
+        "verified",
+        "unsupported"
+      ]
+    },
+    "extra_body": {
+      "type": "object"
+    },
+    "pricing": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_revision",
+    "provider",
+    "base_url",
+    "model",
+    "api_key_env",
+    "timeout_seconds",
+    "context_tokens",
+    "tool_calling",
+    "vision",
+    "extra_body",
+    "pricing"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rsagent:provider:0.1.0"
+}

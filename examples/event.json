@@ -1,0 +1,11 @@
+{
+  "schema_revision": "0.1.0",
+  "event_id": "EVT-EXAMPLE",
+  "run_id": "RUN-EXAMPLE",
+  "step_id": "S1",
+  "timestamp": "2026-10-19T00:00:00+00:00",
+  "event_type": "example.only",
+  "payload": {
+    "scope": "mock_only"
+  }
+}

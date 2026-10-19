@@ -1,0 +1,33 @@
+{
+  "schema_revision": "0.1.0",
+  "job_id": "JOB-EXAMPLE",
+  "run_id": "RUN-EXAMPLE",
+  "step_id": "S1",
+  "status": "running",
+  "software": {
+    "name": "MOCK ONLY",
+    "version": "0.1.0"
+  },
+  "implementation_kind": "mock",
+  "effective_parameters": {
+    "message": "synthetic"
+  },
+  "input_manifest_hash": "07f2e53c448a1ff1804b8da02da7186e878672032cd4a026b5799d2eb0820955",
+  "outputs": [
+    {
+      "artifact_id": "ART-EXAMPLE",
+      "run_id": "RUN-EXAMPLE",
+      "step_id": "S1",
+      "kind": "data",
+      "relative_path": "artifacts/S1/mock.txt",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "size": 1,
+      "verified": false
+    }
+  ],
+  "checks": [],
+  "warnings": [
+    "contract example; no real run"
+  ],
+  "error": null
+}

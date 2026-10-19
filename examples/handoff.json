@@ -1,0 +1,31 @@
+{
+  "schema_revision": "0.1.0",
+  "task_id": "T03",
+  "from_role": "cloud_codex",
+  "to_role": "local_codex",
+  "status": "ready_for_review",
+  "spec_revision": "v1.1",
+  "base_version": "0.1.0.dev1",
+  "artifact_manifest": "releases/release_manifest.json",
+  "input_refs": [],
+  "changed_files": [
+    "contracts/",
+    "orchestrator/",
+    "retrieval/"
+  ],
+  "result_summary": [
+    "cloud core development preview"
+  ],
+  "validation": {
+    "static_or_mock": [
+      "evidence/clean-install/test_results.json"
+    ],
+    "real_software_run_ids": [],
+    "evidence_manifest": null
+  },
+  "limitations": [
+    "real API and Windows software not verified"
+  ],
+  "open_questions": [],
+  "next_action": "review public contracts and implement T08 worker"
+}

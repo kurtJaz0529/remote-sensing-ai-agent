@@ -1,0 +1,31 @@
+{
+  "schema_revision": "0.1.0",
+  "knowledge_id": "KNOW-EXAMPLE",
+  "revision": 1,
+  "kind": "software_method",
+  "claim": "契约占位示例；不得作为方法依据",
+  "source_ids": [
+    "SRC-EXAMPLE"
+  ],
+  "source_locator": "未获取原文",
+  "software": "ENVI",
+  "software_version_scope": "==5.6.*",
+  "sensor_product_scope": [],
+  "required_licenses": [
+    "ENVI"
+  ],
+  "input_formats": [
+    "ENVI"
+  ],
+  "preconditions": [],
+  "limitations": [
+    "not executable knowledge"
+  ],
+  "implementation_kind": "native",
+  "source_review_status": "candidate",
+  "local_verification_status": "not_run",
+  "verification_run_ids": [],
+  "conflicts_with": [],
+  "reviewer_role": "cloud_codex",
+  "lifecycle": "candidate"
+}

@@ -1,0 +1,56 @@
+test_all_schemas_are_valid (test_core.ContractCase.test_all_schemas_are_valid) ... ok
+test_path_traversal_and_symlink_rejected (test_core.ContractCase.test_path_traversal_and_symlink_rejected) ... ok
+test_text_and_docx_extraction_locations (test_core.ContractCase.test_text_and_docx_extraction_locations) ... ok
+test_lifecycle_independent_review_and_withdrawal (test_core.ExperienceCase.test_lifecycle_independent_review_and_withdrawal) ... ok
+test_mock_cannot_promote_experience (test_core.ExperienceCase.test_mock_cannot_promote_experience) ... ok
+test_candidates_do_not_enter_default_execution (test_core.KnowledgeCase.test_candidates_do_not_enter_default_execution) ... ok
+test_conflicts_visible_and_execution_blocked (test_core.KnowledgeCase.test_conflicts_visible_and_execution_blocked) ... ok
+test_exact_matlab_release_scope (test_core.KnowledgeCase.test_exact_matlab_release_scope) ... ok
+test_filters_precede_recommendation (test_core.KnowledgeCase.test_filters_precede_recommendation) ... ok
+test_heldout_answers_refused (test_core.KnowledgeCase.test_heldout_answers_refused) ... ok
+test_offline_snapshot_restore_and_tamper (test_core.KnowledgeCase.test_offline_snapshot_restore_and_tamper) ... ok
+test_publication_requires_evidence (test_core.KnowledgeCase.test_publication_requires_evidence) ... ok
+test_source_returned_with_status_and_locator (test_core.KnowledgeCase.test_source_returned_with_status_and_locator) ... ok
+test_unreviewed_run_reference_cannot_publish (test_core.KnowledgeCase.test_unreviewed_run_reference_cannot_publish) ... ok
+test_withdrawal_does_not_fall_back_to_old_revision (test_core.KnowledgeCase.test_withdrawal_does_not_fall_back_to_old_revision) ... ok
+test_capability_guards (test_core.ProviderCase.test_capability_guards) ... ok
+test_endpoint_and_extra_body_guards (test_core.ProviderCase.test_endpoint_and_extra_body_guards) ... ok
+test_http_errors_are_classified_and_not_retried (test_core.ProviderCase.test_http_errors_are_classified_and_not_retried) ... ok
+test_invalid_tool_arguments_never_released (test_core.ProviderCase.test_invalid_tool_arguments_never_released) ... ok
+test_missing_key_is_blocked_before_network (test_core.ProviderCase.test_missing_key_is_blocked_before_network) ... ok
+test_openai_and_deepseek_wire_and_usage (test_core.ProviderCase.test_openai_and_deepseek_wire_and_usage) ... ok
+test_persistent_budget_blocks_after_prior_cost_or_uncertainty (test_core.ProviderCase.test_persistent_budget_blocks_after_prior_cost_or_uncertainty) ... ok
+test_timeout_records_unknown_cost (test_core.ProviderCase.test_timeout_records_unknown_cost) ... ok
+test_unknown_pricing_blocks_bounded_request (test_core.ProviderCase.test_unknown_pricing_blocks_bounded_request) ... ok
+test_unknown_tool_never_released (test_core.ProviderCase.test_unknown_tool_never_released) ... ok
+test_usage_intent_is_durable_before_request (test_core.ProviderCase.test_usage_intent_is_durable_before_request) ... ok
+test_approval_bound_to_revision (test_core.RuntimeCase.test_approval_bound_to_revision) ... ok
+test_async_poll_then_success (test_core.RuntimeCase.test_async_poll_then_success) ... ok
+test_budget_blocks_second_step (test_core.RuntimeCase.test_budget_blocks_second_step) ... ok
+test_conflicts_and_unknowns_block (test_core.RuntimeCase.test_conflicts_and_unknowns_block) ... ok
+test_cycle_blocks (test_core.RuntimeCase.test_cycle_blocks) ... ok
+test_duplicate_resume_does_not_recompute (test_core.RuntimeCase.test_duplicate_resume_does_not_recompute) ... ok
+test_duplicate_run_creation_reuses_same_approval (test_core.RuntimeCase.test_duplicate_run_creation_reuses_same_approval) ... ok
+test_handoff_bundle_integrity_and_mock_publication_refusal (test_core.RuntimeCase.test_handoff_bundle_integrity_and_mock_publication_refusal) ... ok
+test_invalid_parameters_never_dispatched (test_core.RuntimeCase.test_invalid_parameters_never_dispatched) ... ok
+test_lost_reply_reconciles_without_duplicate_write (test_core.RuntimeCase.test_lost_reply_reconciles_without_duplicate_write) ... ok
+test_missing_required_screenshot_blocks (test_core.RuntimeCase.test_missing_required_screenshot_blocks) ... ok
+test_no_approval_no_execution (test_core.RuntimeCase.test_no_approval_no_execution) ... ok
+test_no_evidence_no_completion (test_core.RuntimeCase.test_no_evidence_no_completion) ... ok
+test_original_change_blocks_preflight (test_core.RuntimeCase.test_original_change_blocks_preflight) ... ok
+test_real_mode_needs_local_capabilities (test_core.RuntimeCase.test_real_mode_needs_local_capabilities) ... ok
+test_restart_uses_durable_state (test_core.RuntimeCase.test_restart_uses_durable_state) ... ok
+test_result_identity_parameter_and_hash_attacks (test_core.RuntimeCase.test_result_identity_parameter_and_hash_attacks) ... ok
+test_revision_immutable (test_core.RuntimeCase.test_revision_immutable) ... ok
+test_running_job_cancel_retains_evidence (test_core.RuntimeCase.test_running_job_cancel_retains_evidence) ... ok
+test_subprocess_worker_protocol (test_core.RuntimeCase.test_subprocess_worker_protocol) ... ok
+test_successful_mock_has_evidence_and_preserves_input (test_core.RuntimeCase.test_successful_mock_has_evidence_and_preserves_input) ... ok
+test_unfulfilled_acceptance_check_blocks_completion (test_core.RuntimeCase.test_unfulfilled_acceptance_check_blocks_completion) ... ok
+test_unknown_dependency_blocks (test_core.RuntimeCase.test_unknown_dependency_blocks) ... ok
+test_unknown_job_never_resubmitted (test_core.RuntimeCase.test_unknown_job_never_resubmitted) ... ok
+test_worker_failure_terminal_without_retry (test_core.RuntimeCase.test_worker_failure_terminal_without_retry) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.418s
+
+OK

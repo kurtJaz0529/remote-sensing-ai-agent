@@ -1,0 +1,13 @@
+{
+  "schema_revision": "0.1.0",
+  "source_id": "SRC-EXAMPLE",
+  "title": "Contract placeholder; not a scientific reference",
+  "source_type": "model_candidate",
+  "url": "https://example.invalid/placeholder",
+  "locator": "not available",
+  "software_version": "5.6",
+  "retrieved_at": "2026-10-19",
+  "access_scope": "metadata",
+  "review_status": "candidate",
+  "snapshot_sha256": null
+}

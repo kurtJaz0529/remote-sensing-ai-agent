@@ -1,0 +1,17 @@
+{
+  "schema_revision": "0.1.0",
+  "experience_id": "EXP-EXAMPLE",
+  "revision": 1,
+  "phenomenon": "合同字段示例",
+  "scope": "not an enabled rule",
+  "evidence_run_ids": [
+    "RUN-REQUIRED-NOT-PROVIDED"
+  ],
+  "reproduction_run_ids": [],
+  "fix_comparison_run_ids": [],
+  "regression_run_ids": [],
+  "reviewer_role": null,
+  "author_role": "cloud_codex",
+  "status": "candidate",
+  "supersedes": null
+}

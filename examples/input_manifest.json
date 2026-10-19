@@ -1,0 +1,12 @@
+{
+  "schema_revision": "0.1.0",
+  "dataset_id": "SYNTHETIC-DATA",
+  "origin": "user_provided",
+  "files": [
+    {
+      "relative_path": "fixture.txt",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "size": 1
+    }
+  ]
+}
