@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-19",
+  "source_sha256": "121f1268c855ace06edd642ff191ff04da74499df3ff70c69c8b8bcee11345e5",
+  "software": {
+    "matlab": {
+      "software": "MATLAB",
+      "version": "9.12.0.1884302 (R2022a)",
+      "shape": [
+        16,
+        16,
+        6
+      ],
+      "readback_equal": true,
+      "operation": "mean of six stored-value bands",
+      "georeference": "unknown; no map coordinates or physical areas assigned"
+    },
+    "arcpy": {
+      "software": "ArcGIS Pro",
+      "version": "3.6",
+      "readback_equal": true,
+      "shape": [
+        400,
+        640,
+        6
+      ],
+      "broken_layers": [],
+      "spatial_reference": "Unknown",
+      "scope": "native raster copy and project reopen; no classification or accuracy claim"
+    }
+  },
+  "envi": {
+    "task": "SubsetRaster",
+    "parameters": {
+      "SUB_RECT": [
+        0,
+        0,
+        15,
+        15
+      ],
+      "BANDS": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "shape": [
+      16,
+      16,
+      6
+    ],
+    "bytes_equal_to_source_subset": true
+  },
+  "outputs": [
+    {
+      "relative_path": "arcpy/copy.tfw",
+      "sha256": "d8fb3fc806533e9a8d79cc9a1bb34e0f0fd365a40ca2ce0ae81e68211ffa8b40",
+      "size": 79
+    },
+    {
+      "relative_path": "arcpy/copy.tif",
+      "sha256": "aa36e1c9b43cc5384a3003facd708c61b80bc931d49947e7ef5aba76fdad9923",
+      "size": 1069311
+    },
+    {
+      "relative_path": "arcpy/copy.tif.aux.xml",
+      "sha256": "2b85a8a04630572c77cf94d8c1ff334ce1715a5345b04a3c6f9e11548496592d",
+      "size": 7991
+    },
+    {
+      "relative_path": "arcpy/copy.tif.xml",
+      "sha256": "e07ec8147ed20e944276fa9a4eff111c164e6346ade201c84247f3447e4245df",
+      "size": 4189
+    },
+    {
+      "relative_path": "arcpy/probe.aprx",
+      "sha256": "fdca88acc938e494ef1756e1545fd5dd674c5e3caf7b03c467f92739b1a6afff",
+      "size": 14583
+    },
+    {
+      "relative_path": "arcpy/summary.json",
+      "sha256": "890faec0bfdf8159c50cd710a3bd857fc90d8c4965a9d563d25a14185e5df716",
+      "size": 276
+    },
+    {
+      "relative_path": "envi-subset.dat",
+      "sha256": "7e009601e9e7c4eecad9eab1c0c0717d566a4d96e1461b93a73d6f959dcfc620",
+      "size": 1536
+    },
+    {
+      "relative_path": "envi-subset.hdr",
+      "sha256": "d2ea3d4531b07079952a993e432b3322900c8290f17e5ed36c4c9677db1af9aa",
+      "size": 530
+    },
+    {
+      "relative_path": "matlab/subset.mat",
+      "sha256": "7d633f6ed70b5e6bf45a41d223df4fee6bd39de53e975b92a60029636b532f99",
+      "size": 1638
+    },
+    {
+      "relative_path": "matlab/summary.json",
+      "sha256": "1af730c4d935368d487dc5d7b0acbb5efeb4236620f5012d4c9c01a532ad86eb",
+      "size": 214
+    }
+  ],
+  "limitations": [
+    "Native probes executed directly through MCP or dedicated software Python, not unified worker handlers.",
+    "No formal experiment, screenshots, classification accuracy, or independent acceptance is claimed.",
+    "Source has unknown CRS and scale; no physical areas assigned."
+  ]
+}

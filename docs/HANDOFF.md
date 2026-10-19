@@ -1,5 +1,7 @@
 # 三成员交接
 
+最新本地批次见 [T08 进程与三软件验证](LOCAL_WORKER.md)。独立进程协议已通过故障测试；三软件最小直接处理与重读有真实证据。真实后端尚未绑定统一 worker，不自签整体完成；继续 T08 handler/环境隔离与 T16 截图，再按依赖进入 T24。此前 T01/T02 批次保留在 [前置记录](LOCAL_FOUNDATION_20261019.md)。
+
 先读README、COLLABORATION、COVERAGE、WORKER_PROTOCOL，再看contracts/、examples/与specs/原文快照。Notion任务汇总继续更新同一编号；根据用户2026-10-19的新要求，代码及公共文件在GitHub协作。本地Codex与Antigravity继续开发，云端Codex后续承接补充工作。源码已导入本仓库，跨环境不依赖云端工作区路径。
 
 ## 本地 Codex 接手
