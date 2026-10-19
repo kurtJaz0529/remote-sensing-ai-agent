@@ -1,0 +1,230 @@
+{
+  "spec_revision": "v1.1",
+  "purpose": "scope_and_acceptance_reference; actual status remains in Notion",
+  "tasks": [
+    {
+      "id": "T01",
+      "planned_role": "本地Codex",
+      "dependencies": "无",
+      "deliverables": "探测Windows、资源、三软件版本/许可/模块/接口/桌面；交environment与capabilities草案",
+      "acceptance": "每个可用项有探测证据；未知/受限项单列；历史版本不直接当当前事实"
+    },
+    {
+      "id": "T02",
+      "planned_role": "本地Codex",
+      "dependencies": "无",
+      "deliverables": "盘点用户实验影像、ROI、要求、报告和辅助文件；输入manifest与基准案例建议",
+      "acceptance": "原件哈希、文件关系、缺失项完整；选定一个可做的分类案例，标明评价性质"
+    },
+    {
+      "id": "T03",
+      "planned_role": "云端Codex",
+      "dependencies": "无；吸收T01/T02结果",
+      "deliverables": "建本地项目目录、AGENTS草案、需求编号、工具/事件/产物/知识schema、Notion任务汇总、handoff与文件所有权",
+      "acceptance": "schema可验证示例；成员基于同版协议开发；需求范围无GUI/影像搜索扩张"
+    },
+    {
+      "id": "T04",
+      "planned_role": "云端Codex",
+      "dependencies": "T03",
+      "deliverables": "DeepSeek/GPT provider配置、工具调用/视觉能力检测、错误处理与用量记录",
+      "acceptance": "真实API小请求与mock异常分别记录；参数解析失败不会执行；切换模型不重跑已有任务"
+    },
+    {
+      "id": "T05",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "无；遵循02资料范围",
+      "deliverables": "首批来源目录、检索问题、软件/遥感/论文/GitHub分类，30–50项为参考上限",
+      "acceptance": "关键条目有URL/DOI/定位和版本；摘要/全文状态区分；去重并列待核实"
+    },
+    {
+      "id": "T06",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "T05、T03；本机适用性依T01",
+      "deliverables": "10–15张方法卡、三软件流程资料、参数/限制/常见错误卡和冲突清单",
+      "acceptance": "关键参数能回到原文；来源/版本/本机验证三状态分开；无依据不发布"
+    },
+    {
+      "id": "T07",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "无；依据已知需求与档案",
+      "deliverables": "需求到验收矩阵、报告提纲、必需截图清单、既有错误用例设计",
+      "acceptance": "覆盖R01–R12；数据/工程/截图/报告各有可检查标准；试验案例不冒充真值"
+    },
+    {
+      "id": "T08",
+      "planned_role": "本地Codex",
+      "dependencies": "T01、T03",
+      "deliverables": "本地worker进程协议、任务目录、日志、取消、软件/工程锁、输入路径解析",
+      "acceptance": "失败/取消有终态；重复提交不重复写；软件Python环境隔离"
+    },
+    {
+      "id": "T09",
+      "planned_role": "本地Codex",
+      "dependencies": "T08",
+      "deliverables": "验证官方MATLAB MCP/Toolkit并封装首批能力；记录固定版本和Engine回退",
+      "acceptance": "本机读用户子集、执行固定脚本、保存重读；实际版本/工具箱和参数可追溯"
+    },
+    {
+      "id": "T10",
+      "planned_role": "本地Codex",
+      "dependencies": "T08",
+      "deliverables": "ENVI任务枚举/参数说明/受控执行MCP；Classic与Task能力分表",
+      "acceptance": "一个原生任务产生有效输出；无任务/许可时明确失败；参数、HDR与日志齐全"
+    },
+    {
+      "id": "T11",
+      "planned_role": "本地Codex",
+      "dependencies": "T08",
+      "deliverables": "ArcPy worker、许可预检、栅格操作、工程保存/重开；社区MCP仅作候选",
+      "acceptance": "在Pro专用环境实际运行；aprx无坏链；后台操作与界面能力分别登记"
+    },
+    {
+      "id": "T12",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "T03、T06",
+      "deliverables": "Skill模板、首批8项Skill与客户端加载约定；方法能力路由",
+      "acceptance": "每项有输入/参数/工具/截图/验收/恢复/询问条件；缺工具的Skill标为待验证"
+    },
+    {
+      "id": "T13",
+      "planned_role": "云端Codex",
+      "dependencies": "T03、T05",
+      "deliverables": "知识schema校验、候选/发布区、SQLite索引、版本过滤、来源返回与离线快照",
+      "acceptance": "不兼容版本不被推荐执行；每条结果带出处/状态；未验证候选不进入默认执行"
+    },
+    {
+      "id": "T14",
+      "planned_role": "云端Codex",
+      "dependencies": "T03、T07、T13",
+      "deliverables": "要求文档解析、需求矩阵、澄清、计划revision和用户确认记录",
+      "acceptance": "文档/个人要求冲突可见；未知不臆造；未经确认不能启动正式处理"
+    },
+    {
+      "id": "T15",
+      "planned_role": "云端Codex",
+      "dependencies": "T03、T04、T08协议",
+      "deliverables": "持久化状态机、步骤依赖、预算、幂等、重试/暂停/恢复和工具客户端",
+      "acceptance": "用mock注入超时/中断/重复提交/失败；无证据不能完成；恢复不重复写"
+    },
+    {
+      "id": "T16",
+      "planned_role": "本地Codex",
+      "dependencies": "T08、T07；配合相应软件适配",
+      "deliverables": "桌面截图worker、窗口/图层身份检查、截图时间/产物关联",
+      "acceptance": "三软件分别取得真实展示截图；旧窗口误用能被识别；锁屏等失败明确阻塞"
+    },
+    {
+      "id": "T17",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "T03、T07、T02",
+      "deliverables": "数据/样本审计器：波段单位坐标NoData、类别映射、训练/参考划分",
+      "acceptance": "缺CRS、未知比例、编码冲突、重叠样本等能被检出；检查结果有证据"
+    },
+    {
+      "id": "T18",
+      "planned_role": "Gemini（Antigravity）开发；本地Codex执行",
+      "dependencies": "T12、T17、所选后端T09/T10/T11",
+      "deliverables": "裁剪、重投影、重采样、组合/镶嵌方法包",
+      "acceptance": "输出范围/网格/坐标正确；标签不用连续插值；按实际后端验收"
+    },
+    {
+      "id": "T19",
+      "planned_role": "Gemini（Antigravity）开发；本地Codex执行",
+      "dependencies": "T12、T17、所选后端",
+      "deliverables": "指数与PCA方法包；浮点、比例/偏移、零分母、掩膜、拟合集合规则",
+      "acceptance": "构造算例正确；用户数据结果可读且参数可追溯；不对未知产品硬套系数"
+    },
+    {
+      "id": "T20",
+      "planned_role": "Gemini（Antigravity）开发；本地Codex执行",
+      "dependencies": "T12、T17、所选后端",
+      "deliverables": "最大似然、K-Means、ISODATA的已验证子集和参数卡",
+      "acceptance": "实现来源/原生性明确；样本协议固定；算法未触发的分支不写成已验证"
+    },
+    {
+      "id": "T21",
+      "planned_role": "Gemini（Antigravity）开发；本地Codex执行",
+      "dependencies": "T20",
+      "deliverables": "Majority/Sieve/Clump分支与规则卡、对比统计",
+      "acceptance": "邻域/边缘/阈值/类别冲突有定义；原生与近似不混淆；平滑不自动称提精度"
+    },
+    {
+      "id": "T22",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "T07、T17；用T20/T21产物集成",
+      "deliverables": "独立混淆矩阵、逐类指标、未分类率、矢量/栅格一致性检查",
+      "acceptance": "非对称矩阵识别PA/UA交换；评价性质正确；从实际输出复算而非复用报告数字"
+    },
+    {
+      "id": "T23",
+      "planned_role": "Gemini（Antigravity）",
+      "dependencies": "T03、T07、T16、T22",
+      "deliverables": "证据索引、报告生成器、DOCX/PDF、需求覆盖与工程/复现包清单",
+      "acceptance": "正文表图来自同一run；截图引用可追溯；API操作不描述为手工点击；PDF实际生成检查"
+    },
+    {
+      "id": "T24",
+      "planned_role": "本地Codex",
+      "dependencies": "T14、T15、T16、T17、选定分类链、T22、T23",
+      "deliverables": "用户分类实验端到端：确认→执行→核验→截图→工程/复现包→报告",
+      "acceptance": "所有必需交付真实存在并可打开；原件不变；保留实际参数、失败与最终分支"
+    },
+    {
+      "id": "T25",
+      "planned_role": "云端Codex主审；本地Codex提供执行证据",
+      "dependencies": "T24",
+      "deliverables": "独立验收报告、缺陷清单、需求逐项结论",
+      "acceptance": "区分已执行/静态检查/历史记录；严重错误归零；不以模型完成声明验收"
+    },
+    {
+      "id": "T26",
+      "planned_role": "本地Codex执行；Gemini（Antigravity）设计检查",
+      "dependencies": "T15、T16、T22、T25",
+      "deliverables": "故障注入和恢复测试：参数丢失、旧截图、类别置换、无CRS、报告旧版、进程中断",
+      "acceptance": "对应故障被阻断或正确标识；恢复无重复写；保留失败证据与可复核结果"
+    },
+    {
+      "id": "T27",
+      "planned_role": "本地Codex",
+      "dependencies": "T23、T24",
+      "deliverables": "归档、manifest校验、空目录恢复、路径迁移与重开检查",
+      "acceptance": "归档可恢复；文件哈希匹配；工程依赖齐全；不覆盖不同已有文件"
+    },
+    {
+      "id": "T28",
+      "planned_role": "云端Codex；Gemini（Antigravity）审规则",
+      "dependencies": "T13、T25",
+      "deliverables": "经验候选→复现→修复对照→回归→发布/撤回；记录知识影响",
+      "acceptance": "未验证经验不能改变默认流程；新版本能回退；每条启用规则有验证run"
+    },
+    {
+      "id": "T29",
+      "planned_role": "Gemini（Antigravity）前期补缺；云端Codex执行检索评测",
+      "dependencies": "T06、T13、T25反馈",
+      "deliverables": "方法/版本/错误码检索题、预期来源ID、知识缺口及补充来源",
+      "acceptance": "按题返回正确版本与出处；冲突不被隐去；保留验收答案不进运行检索库"
+    },
+    {
+      "id": "T30",
+      "planned_role": "本地Codex执行；云端Codex独立评审",
+      "dependencies": "T18/T19、T23、T26、T27、T28",
+      "deliverables": "第二个用户数据案例与保留验收；对比基线和知识更新效果",
+      "acceptance": "必须使用用户提供/预留数据；新问题未用于调参；正确率与证据不退化；缺数据如实阻塞"
+    },
+    {
+      "id": "T31",
+      "planned_role": "云端Codex集成；本地Codex签验",
+      "dependencies": "T09–T11连接通过、T25–T30通过或明确裁剪范围",
+      "deliverables": "固定release、安装/配置/使用说明、能力矩阵、已知限制、恢复方案",
+      "acceptance": "干净任务目录按说明可运行；未验证方法标受限；不将计划项写成已实现"
+    },
+    {
+      "id": "T32",
+      "planned_role": "本地Codex协助用户",
+      "dependencies": "T31",
+      "deliverables": "用户试用：导入→澄清→确认→执行→查看截图报告→重开工程",
+      "acceptance": "用户能完成常用任务；记录真实问题、时间/费用/干预基线，进入下一版任务"
+    }
+  ]
+}

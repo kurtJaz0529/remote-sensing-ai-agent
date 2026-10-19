@@ -3,7 +3,7 @@
   "version": "0.1.0.dev1",
   "spec_revision": "v1.1",
   "schema_revision": "0.1.0",
-  "scope": "cloud_core_development_preview",
+  "scope": "cloud_core_import_and_local_integration_preview",
   "runtime": "single local coordinator / SQLite / Python CLI",
   "requirements": {
     "R01": "Windows CLI; no product GUI",
@@ -16,14 +16,38 @@
     "R08": "data, native project/reproducible package, DOCX/PDF and evidence",
     "R09": "versioned knowledge, skills and methods",
     "R10": "validated experience, regression and withdrawal",
-    "R11": "three roles, Notion task/handoff collaboration",
+    "R11": "local Codex and Antigravity collaborate through GitHub; Notion task ledger; cloud Codex supplemental work",
     "R12": "Gemini/Antigravity is one research/development member"
   },
   "ownership": {
-    "cloud_codex": ["contracts", "orchestrator", "retrieval", "tasks", "handoffs", "releases"],
-    "local_codex": ["adapters", "local worker", "real software evidence"],
-    "gemini_antigravity": ["knowledge", "skills", "methods", "verification", "reports"]
+    "cloud_codex": [
+      "delivered core baseline",
+      "explicit supplemental tasks",
+      "independent review when assigned"
+    ],
+    "local_codex": [
+      "repository integration",
+      "contracts",
+      "orchestrator",
+      "retrieval",
+      "adapters",
+      "local worker",
+      "real software evidence"
+    ],
+    "gemini_antigravity": [
+      "knowledge",
+      "skills",
+      "methods",
+      "verification",
+      "reports"
+    ]
   },
-  "out_of_scope": ["product GUI", "imagery search/download", "GitHub collaboration", "distributed compute", "model fine-tuning"],
-  "release_gate": "not met: real API, Windows, three-software connections and T25-T30 evidence pending"
+  "out_of_scope": [
+    "product GUI",
+    "imagery search/download",
+    "distributed compute",
+    "model fine-tuning"
+  ],
+  "release_gate": "not met: real API, native software connections and T25-T30 evidence pending; local core test evidence tracked separately",
+  "collaboration_revision": "github-2026-10-19"
 }

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-19",
+  "platform": "Windows",
+  "python": "3.13.7",
+  "tests_run": 51,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "schema_examples": 14,
+  "scope": "local Windows core unit/mock/protocol validation; no real software, model API or scientific experiment",
+  "upstream_archive_sha256": "a8610d1be4d0b2d1c5c71d435f19f832051ae39c0cfc08eb3e5dd7210f3a5f6b",
+  "upstream_manifest_files_verified": 95,
+  "fix": "close SQLite registry before TemporaryDirectory cleanup in two tests",
+  "duration_seconds": 2.917
+}

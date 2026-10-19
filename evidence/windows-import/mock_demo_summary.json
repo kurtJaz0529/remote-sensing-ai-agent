@@ -1,0 +1,17 @@
+{
+  "after_lost_reply": "Blocked",
+  "after_recovery": "Completed",
+  "input_preserved": true,
+  "integrity": {
+    "evidence_manifest_sha256": "e2f627f6ea19cf5bab10bbe2ce24c110ccdf781ecf33540766cbcd5d2948c3fa",
+    "file_count": 5,
+    "mode": "mock",
+    "passed": true,
+    "run_id": "RUN-a3038c85ee6f49f2929615b94b24516a",
+    "scope": "file_integrity_only; local software and scientific correctness need independent review"
+  },
+  "no_approval_blocked": true,
+  "run_id": "RUN-a3038c85ee6f49f2929615b94b24516a",
+  "scope": "mock_only",
+  "submissions": 1
+}

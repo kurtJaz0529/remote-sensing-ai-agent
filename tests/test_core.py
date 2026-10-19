@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from unittest.mock import patch
 import httpx
@@ -358,8 +359,7 @@ class KnowledgeCase(unittest.TestCase):
 
 class ExperienceCase(unittest.TestCase):
     def test_lifecycle_independent_review_and_withdrawal(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            registry=ExperienceRegistry(Path(tmp)/"experience.sqlite"); self.addCleanup(registry.close)
+        with tempfile.TemporaryDirectory() as tmp, closing(ExperienceRegistry(Path(tmp)/"experience.sqlite")) as registry:
             evidence={"REAL-1":{"mode":"real","passed":True,"evidence_manifest_sha256":"a"*64}}
             record=dict(schema_revision=VERSION,experience_id="EXP-1",revision=1,phenomenon="test",scope="test-only",evidence_run_ids=["REAL-1"],reproduction_run_ids=[],fix_comparison_run_ids=[],regression_run_ids=[],reviewer_role=None,author_role="cloud_codex",status="candidate",supersedes=None)
             registry.save(record,evidence); self.assertEqual(registry.active(),[])
@@ -375,8 +375,7 @@ class ExperienceCase(unittest.TestCase):
             registry.save(record,evidence); self.assertEqual(registry.active(),[])
 
     def test_mock_cannot_promote_experience(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            registry=ExperienceRegistry(Path(tmp)/"experience.sqlite"); self.addCleanup(registry.close)
+        with tempfile.TemporaryDirectory() as tmp, closing(ExperienceRegistry(Path(tmp)/"experience.sqlite")) as registry:
             record=dict(schema_revision=VERSION,experience_id="EXP-1",revision=1,phenomenon="test",scope="test-only",evidence_run_ids=["MOCK"],reproduction_run_ids=[],fix_comparison_run_ids=[],regression_run_ids=[],reviewer_role=None,author_role="cloud_codex",status="candidate",supersedes=None)
             with self.assertRaises(ValueError): registry.save(record,{"MOCK":{"mode":"mock","passed":True,"evidence_manifest_sha256":"a"*64}})
 

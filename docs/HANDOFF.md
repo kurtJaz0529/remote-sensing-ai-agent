@@ -1,6 +1,6 @@
 # 三成员交接
 
-先读README、COVERAGE、WORKER_PROTOCOL，再看contracts/、examples/与specs/原文快照。Notion任务汇总继续更新同一编号，不建立GitHub协作仓库。源码在本包，跨环境不依赖云端工作区路径。
+先读README、COLLABORATION、COVERAGE、WORKER_PROTOCOL，再看contracts/、examples/与specs/原文快照。Notion任务汇总继续更新同一编号；根据用户2026-10-19的新要求，代码及公共文件在GitHub协作。本地Codex与Antigravity继续开发，云端Codex后续承接补充工作。源码已导入本仓库，跨环境不依赖云端工作区路径。
 
 ## 本地 Codex 接手
 

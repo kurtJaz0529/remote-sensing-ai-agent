@@ -1,10 +1,25 @@
-# AI 遥感 Agent：云端核心开发包 0.1.0.dev1
+# AI 遥感本地 Agent · Remote Sensing AI Agent
+
+Windows 本地遥感实验 Agent：通过 DeepSeek/GPT 规划任务，调用本机 ENVI、MATLAB 和 ArcGIS Pro，保存可追溯的处理结果、真实截图、工程/复现包及报告。
+
+**当前状态：已导入云端 Codex 的 `0.1.0.dev1` 核心开发成果，正在本地集成。三软件真实接入、完整报告与真实实验闭环尚待验证。**
+
+本仓库由本地 Codex 与 Antigravity 持续协作，云端 Codex 后续承接补充开发或独立评审。欢迎其他贡献者通过 Fork / Pull Request 提交代码和文件；仓库写权限由所有者按 GitHub 账号授予。
+
+- [贡献与文件上传](CONTRIBUTING.md)
+- [成员分工、分支规则与 Antigravity 启动说明](docs/COLLABORATION.md)
+- [32 项任务路线图](docs/ROADMAP.md)
+- [导入来源与验证范围](docs/IMPORT.md)
+
+首版只处理用户提供的数据，不建设影像搜索下载模块或产品 GUI。ENVI、MATLAB、ArcGIS Pro 需使用者自行安装并持有相应许可。
+
+## 已交付的核心基线
 
 基于 Notion《AI 遥感本地 Agent｜三成员协作与Notion任务计划 v1.1》。本包交付协议、模型接口、需求提取、计划确认、SQLite编排、离线检索和交接检查的可运行实现。**这是云端开发预览，尚不是三软件可用的产品发布。**
 
 ## 安装
 
-Python 3.11+，建议使用独立虚拟环境。Windows 与三软件环境的实际验证由本地 Codex 执行；本次测试环境是 Linux / Python 3.12。
+Python 3.11+，建议使用独立虚拟环境。原云端测试环境为 Linux / Python 3.12；本地导入已在 Windows / Python 3.13.7 通过 51 项核心测试与 14 个 Schema 示例。三软件环境仍需单独实测。
 
 ```powershell
 py -3.11 -m venv .venv
@@ -66,6 +81,6 @@ rsagent audit-bundle <run目录>
 
 ## 交付与限制
 
-本批任务/验收逐项见 [COVERAGE.md](docs/COVERAGE.md)，成员接入见 [HANDOFF.md](docs/HANDOFF.md)，协议见 contracts/ 与 examples/。固定发布清单为 releases/release_manifest.json。Notion 是任务与交接入口，真实实验状态属于用户本地 SQLite。
+原云端批次任务/验收逐项见 [COVERAGE.md](docs/COVERAGE.md)，成员接入见 [HANDOFF.md](docs/HANDOFF.md)，协议见 contracts/ 与 examples/。`releases/release_manifest.json` 是原云端包的历史清单，不是后续 Git 提交的实时清单；校验方式见 [IMPORT.md](docs/IMPORT.md)。GitHub 保存源码版本，Notion 是任务与交接入口，真实实验状态属于用户本地 SQLite。
 
-尚未验证：真实 DeepSeek/GPT API、Windows运行、T08本机worker、ENVI/MATLAB/ArcGIS Pro、真实截图/工程、完整报告与真实用户案例。CLI不会搜索或下载实验影像，也没有产品GUI。软件/工程/桌面锁、取消进程、软件隔离与许可检查需由本地worker实现；JSON-RPC客户端是本批交接传输协议，MCP桥接仍待本地/集成验证。
+尚未验证：真实 DeepSeek/GPT API、T08本机worker、ENVI/MATLAB/ArcGIS Pro、真实截图/工程、完整报告与真实用户案例。Windows核心单元/mock测试通过不等于这些能力已接通。CLI不会搜索或下载实验影像，也没有产品GUI。软件/工程/桌面锁、取消进程、软件隔离与许可检查需由本地worker实现；JSON-RPC客户端是本批交接传输协议，MCP桥接仍待本地/集成验证。
