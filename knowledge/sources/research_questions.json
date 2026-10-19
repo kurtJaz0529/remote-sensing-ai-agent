@@ -1,0 +1,149 @@
+{
+  "schema_revision": "0.1.0",
+  "task_id": "T05",
+  "role": "gemini_antigravity",
+  "updated_at": "2026-10-19",
+  "stopping_rules": {
+    "max_sources_initial_batch": 50,
+    "actual_sources_collected": 36,
+    "priority_order": [
+      "local_help_and_probe_observations",
+      "official_software_and_sensor_docs",
+      "method_foundational_papers_and_textbooks",
+      "verified_github_sdk_and_adapters"
+    ],
+    "exclusions": [
+      "unverified blog reposts without original citations",
+      "full-text claims when only abstract or metadata was inspected",
+      "external satellite imagery download catalogs (violates R04)",
+      "unpinned community repos with incompatible licenses for baseline runtime"
+    ]
+  },
+  "domains": [
+    {
+      "domain_id": "DOM-01",
+      "name": "ENVI结构与调用",
+      "research_questions": [
+        "How do ENVI 5.6 Task Engine (ENVITask / taskengine.exe) and ENVI Classic differ in parameter schema and invocation?",
+        "Which classification and post-processing tasks are natively exposed in ENVI 5.6, and how are .dat/.hdr outputs paired?",
+        "Why do ENVI Classic GUI dialogs occasionally drop rapid keyboard inputs, and how must effective_parameters be verified?"
+      ],
+      "source_ids": [
+        "SRC-ENVI-001",
+        "SRC-ENVI-002",
+        "SRC-ENVI-003",
+        "SRC-ENVI-004",
+        "SRC-ENVI-005",
+        "SRC-ENVI-006",
+        "SRC-ENVI-007",
+        "SRC-ENVI-008",
+        "SRC-ENG-003"
+      ]
+    },
+    {
+      "domain_id": "DOM-02",
+      "name": "MATLAB结构与调用",
+      "research_questions": [
+        "What are the Python version and toolbox constraints for MATLAB R2022a (9.12.0.1884302) on the user's Windows 11 host?",
+        "How do we implement Maximum Likelihood, K-Means++, ISODATA, PCA, and morphological post-processing in base MATLAB R2022a when Statistics/Image/Mapping Toolboxes are absent?",
+        "How are random seeds, array dimensions (H x W x B vs N x B), and session locks managed via MATLAB MCP Server or Engine API?"
+      ],
+      "source_ids": [
+        "SRC-MATLAB-001",
+        "SRC-MATLAB-002",
+        "SRC-MATLAB-003",
+        "SRC-MATLAB-004",
+        "SRC-MATLAB-005"
+      ]
+    },
+    {
+      "domain_id": "DOM-03",
+      "name": "ArcGIS Pro结构与调用",
+      "research_questions": [
+        "How does the isolated ArcGIS Pro 3.6 (ArcInfo + Spatial/ImageAnalyst) Python worker validate extension availability before running raster tools?",
+        "Why do ArcGISProject.activeMap and activeView return None in headless scripts, and how do we verify .aprx broken data sources?",
+        "How must categorical vs continuous rasters configure resampling_type, snapRaster, extent, and cellSize in ArcPy?"
+      ],
+      "source_ids": [
+        "SRC-ARCGIS-001",
+        "SRC-ARCGIS-002",
+        "SRC-ARCGIS-003",
+        "SRC-ARCGIS-004",
+        "SRC-ARCGIS-005",
+        "SRC-ARCGIS-006"
+      ]
+    },
+    {
+      "domain_id": "DOM-04",
+      "name": "数据与物理量",
+      "research_questions": [
+        "When can Landsat Collection 2 Level-2 Surface Reflectance scale factors (0.0000275 * DN - 0.2) be applied vs keeping raw storage byte values?",
+        "How should unreferenced rasters (such as Canon City can_tmr.img lacking map info/CRS) represent pixel coordinates and area units?",
+        "How is the 6-band TM order (b1..b6 = TM1, TM2, TM3, TM4, TM5, TM7) mapped to spectral wavelengths?"
+      ],
+      "source_ids": [
+        "SRC-DATA-001",
+        "SRC-DATA-002",
+        "SRC-DATA-003",
+        "SRC-ENVI-008"
+      ]
+    },
+    {
+      "domain_id": "DOM-05",
+      "name": "基础处理与指数",
+      "research_questions": [
+        "What float casting, zero-denominator masking (-9999), and band mappings are required for NDVI, NDWI, MNDWI, and Tasseled Cap (K-T) transforms?",
+        "Why must the Landsat 5 TM Tasseled Cap 3rd component be termed 'wetness-related third component (Third)' rather than directly 'Wetness'?",
+        "How must PCA standardize bands and isolate its fitting sample set from validation buffers?"
+      ],
+      "source_ids": [
+        "SRC-METHOD-001",
+        "SRC-METHOD-002",
+        "SRC-METHOD-003",
+        "SRC-METHOD-004"
+      ]
+    },
+    {
+      "domain_id": "DOM-06",
+      "name": "分类与后处理",
+      "research_questions": [
+        "What are the mathematical assumptions, covariance regularization, and prior settings for Maximum Likelihood and Parallelepiped classification?",
+        "How do ISODATA split/merge thresholds work, and why must untriggered split/merge branches be distinguished from verified branches?",
+        "How do Majority, Sieve, and Clump post-processing affect narrow water bodies, and how do native ENVI vs morphological approximations differ?"
+      ],
+      "source_ids": [
+        "SRC-CLASS-001",
+        "SRC-CLASS-002",
+        "SRC-CLASS-003",
+        "SRC-CLASS-004"
+      ]
+    },
+    {
+      "domain_id": "DOM-07",
+      "name": "评价与空间统计",
+      "research_questions": [
+        "How are Producer's Accuracy (PA), User's Accuracy (UA), Overall Accuracy (OA), Kappa, and unclassified rate defined on an asymmetric confusion matrix?",
+        "What distinguishes diagnostic re-evaluation (MATLAB 73.50%), visual reference ROI agreement (ENVI 43.50%), and independent probability-sampled accuracy (Olofsson et al. 2014)?",
+        "How does Chebyshev spatial buffer checking (Roberts et al. 2017) prevent spatial autocorrelation leakage between training and test ROIs?"
+      ],
+      "source_ids": [
+        "SRC-EVAL-001",
+        "SRC-EVAL-002",
+        "SRC-EVAL-003"
+      ]
+    },
+    {
+      "domain_id": "DOM-08",
+      "name": "工程、桌面截图与开源组件",
+      "research_questions": [
+        "How do desktop_lock, window title/PID verification, and displayed_artifact_sha256 prevent stale or occluded window screenshots?",
+        "What are the Windows session limits of pywinauto (locked screen / disconnected RDP) and how should the coordinator block rather than fake screenshots?"
+      ],
+      "source_ids": [
+        "SRC-ENG-001",
+        "SRC-ENG-002",
+        "SRC-ENG-003"
+      ]
+    }
+  ]
+}

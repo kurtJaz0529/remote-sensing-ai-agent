@@ -1,0 +1,459 @@
+[
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "task-intake",
+    "stage_order": 1,
+    "title_zh": "任务理解与契约生成",
+    "summary": "解析用户自然语言遥感需求，检索匹配软件版本与许可证的知识卡，生成符合 contracts/task.schema.json 的结构化任务契约，并预绑定 evaluation_kind 与 class_schema。",
+    "entry_module": "skills.loader:route_skill_backend",
+    "required_inputs": [
+      "user_prompt",
+      "environment_probe_manifest",
+      "dataset_inventory"
+    ],
+    "expected_outputs": [
+      "task_contract_json",
+      "selected_knowledge_ids",
+      "capability_routing_plan"
+    ],
+    "supported_backends": [
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "orchestrator.engine:Orchestrator",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "基于 contracts/task.schema.json 与 retrieval/index.py 执行前置过滤与契约校验。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-INTAKE-SCHEMA-001",
+      "CHK-INTAKE-EVAL-KIND-001",
+      "CHK-RETRIEVAL-VERSION-001",
+      "CHK-RETRIEVAL-LICENSE-001"
+    ],
+    "fallback_policy": "当目标软件缺少所需工具箱或版本不匹配时，自动切换至已满足许可的软件后端或 PythonReference 确定性方法包，并在契约中显式记录降级原因。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "dataset-audit",
+    "stage_order": 2,
+    "title_zh": "数据集元数据、定标边界与样本空间缓冲审计",
+    "summary": "解析 ENVI .hdr 与二进制栅格尺寸，审计空间参考（CRS）与反射率缩放因子边界，对齐跨软件类别编码（native_code <-> semantic_id），并检查训练/测试样本重叠与 >=5 像元 Chebyshev 缓冲。",
+    "entry_module": "verification.dataset_audit:audit_envi_dataset",
+    "required_inputs": [
+      "hdr_path",
+      "img_path",
+      "class_schema_map",
+      "sample_points_optional"
+    ],
+    "expected_outputs": [
+      "dataset_audit_report",
+      "allowed_area_units",
+      "class_mapping_bridge",
+      "actual_evaluation_kind"
+    ],
+    "supported_backends": [
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "verification.dataset_audit:audit_envi_dataset",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "独立于外部软件即可完整解析 ENVI .hdr、校验字节尺寸与样本空间缓冲。"
+      },
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "adapters.local_env:probe_envi",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "支持通过 ENVI Raster Metadata 二次核对波段与 ROI 样本统计。"
+      },
+      {
+        "software": "ArcGISPro",
+        "version_scope": ">=3.6,<3.7",
+        "required_licenses": [
+          "ArcGISPro"
+        ],
+        "adapter_entrypoint": "adapters.local_env:probe_arcgis",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "支持通过 arcpy.Describe 核对空间参考与矢量要素属性表。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-AUDIT-HDR-001",
+      "CHK-AUDIT-CRS-001",
+      "CHK-AUDIT-SCALE-001",
+      "CHK-CLASS-MAP-001",
+      "CHK-AUDIT-BUFFER-001"
+    ],
+    "fallback_policy": "当 has_crs=False 时强制将面积单位限制为 pixel/pixel^2；当样本间距 <5 像元或为同批测试点迭代修订时，自动将 evaluation_kind 降级为 spatially_contaminated_holdout 或 diagnostic_holdout。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "raster-preprocess",
+    "stage_order": 3,
+    "title_zh": "栅格预处理（裁剪、重投影、重采样、波段堆栈）",
+    "summary": "执行子区裁剪、重投影、重采样与多波段堆栈/镶嵌，对分类图或类别掩膜（is_categorical=True）强制锁定最近邻插值（nearest），拦截 bilinear/cubic 插值污染。",
+    "entry_module": "methods.preprocess:resample_raster",
+    "required_inputs": [
+      "raster_cube",
+      "preprocess_spec",
+      "is_categorical"
+    ],
+    "expected_outputs": [
+      "preprocessed_raster_cube",
+      "preprocess_audit_log"
+    ],
+    "supported_backends": [
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "ENVITask:SubsetRaster/ResampleRaster/BuildBandStack",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ENVI 5.6 taskengine 支持 SubsetRaster、ReprojectRaster、ResampleRaster 与 BuildBandStack。"
+      },
+      {
+        "software": "ArcGISPro",
+        "version_scope": ">=3.6,<3.7",
+        "required_licenses": [
+          "ArcGISPro"
+        ],
+        "adapter_entrypoint": "arcpy.management:Clip/ProjectRaster/Resample/CompositeBands",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ArcGIS Pro 3.6 支持完整栅格投影、重采样与波段合成。"
+      },
+      {
+        "software": "MATLAB",
+        "version_scope": "exact:R2022a",
+        "required_licenses": [
+          "MATLAB"
+        ],
+        "adapter_entrypoint": "methods.preprocess:matlab_base_preprocess",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "本机 MATLAB R2022a 无 Image Processing / Mapping Toolbox，仅支持基础矩阵切片裁剪、最近邻/双线性手写插值与 cat(3,...) 波段堆栈，不支持原生 CRS 重投影。"
+      },
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "methods.preprocess",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "纯 Python 确定性预处理参考实现。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-PREPROC-CROP-001",
+      "CHK-PREPROC-RESAMPLE-CAT-001",
+      "CHK-PREPROC-STACK-001"
+    ],
+    "fallback_policy": "若请求在无 Mapping Toolbox 的 MATLAB 上执行复杂 CRS 重投影，自动路由至 ArcGIS Pro 3.6 或 ENVI 5.6。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "spectral-transform",
+    "stage_order": 4,
+    "title_zh": "光谱指数、PCA 主成分变换与 K-T 缨帽变换",
+    "summary": "强制 float64 转换防止 uint8 下溢，处理零分母掩膜（nodata=-9999.0），支持 NDVI/NDWI/MNDWI/比值指数、隔离拟合域的 PCA 以及 Landsat 5 TM K-T 变换（第三分量严格标注为 Third）。",
+    "entry_module": "methods.spectral",
+    "required_inputs": [
+      "raster_cube",
+      "band_mapping",
+      "transform_spec"
+    ],
+    "expected_outputs": [
+      "transformed_bands",
+      "zero_denominator_mask",
+      "pca_or_kt_metadata"
+    ],
+    "supported_backends": [
+      {
+        "software": "MATLAB",
+        "version_scope": "exact:R2022a",
+        "required_licenses": [
+          "MATLAB"
+        ],
+        "adapter_entrypoint": "methods.spectral:matlab_base_spectral",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "使用基础 MATLAB double()、cov()、eig()/svd() 与矩阵乘法实现，零工具箱依赖。"
+      },
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "ENVITask:SpectralIndex/ForwardPCATransform",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ENVI 5.6 支持 SpectralIndex 与 ForwardPCATransform。"
+      },
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "methods.spectral",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "纯 Python 高精度双精度光谱指数、PCA 与 Crist & Cicone (1984) K-T 变换实现。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-SPEC-FLOAT-001",
+      "CHK-SPEC-ZERO-DENOM-001",
+      "CHK-SPEC-PCA-LEAK-001",
+      "CHK-SPEC-KT-THIRD-001"
+    ],
+    "fallback_policy": "当 PCA 用于监督分类特征提取时，强制要求 fit_domain='train_split_only'；若未提供独立训练集索引则拒绝声明泛化评估。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "unsupervised-classification",
+    "stage_order": 5,
+    "title_zh": "非监督分类（K-Means 与 ISODATA 动态聚类）",
+    "summary": "执行确定性 K-Means 聚类与含分裂（Split）/合并（Merge）追踪的 ISODATA 聚类，输出聚类中心、迭代收敛轨迹及退化诊断标志（degenerated_to_kmeans）。",
+    "entry_module": "methods.classification",
+    "required_inputs": [
+      "raster_cube",
+      "clustering_params",
+      "random_seed"
+    ],
+    "expected_outputs": [
+      "cluster_label_map",
+      "centroids",
+      "iteration_trace",
+      "degenerated_to_kmeans_flag"
+    ],
+    "supported_backends": [
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "ENVITask:ISODATAClassification",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ENVI 5.6 原生提供 ISODATAClassification Task。"
+      },
+      {
+        "software": "MATLAB",
+        "version_scope": "exact:R2022a",
+        "required_licenses": [
+          "MATLAB"
+        ],
+        "adapter_entrypoint": "methods.classification:matlab_base_clustering",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "本机无 Statistics Toolbox（不可调用内置 kmeans），采用基础矩阵距离与分裂/合并迭代实现。"
+      },
+      {
+        "software": "ArcGISPro",
+        "version_scope": ">=3.6,<3.7",
+        "required_licenses": [
+          "ArcGISPro",
+          "SpatialAnalyst"
+        ],
+        "adapter_entrypoint": "arcpy.sa:IsoClusterUnsupervisedClassification",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "通过 Spatial Analyst 扩展执行 IsoCluster 非监督分类。"
+      },
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "methods.classification",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "纯 Python 确定性 K-Means 与完整支持分裂/合并的 ISODATA 实现。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-CLASS-KMEANS-001",
+      "CHK-CLASS-ISO-001"
+    ],
+    "fallback_policy": "当 ISODATA 全程 split_count==0 且 merge_count==0 时，强制在产物元数据与报告中标记 degenerated_to_kmeans=True。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "supervised-classification",
+    "stage_order": 6,
+    "title_zh": "监督分类（最大似然分类与平行六面体分类）",
+    "summary": "基于训练样本执行最大似然分类（含奇异协方差脊正则化与似然阈值未分类支持）和平行六面体分类（显式声明 overlap_policy 并统计 overlap_ratio 与 unclassified_ratio）。",
+    "entry_module": "methods.classification",
+    "required_inputs": [
+      "raster_cube",
+      "training_samples",
+      "classifier_params",
+      "class_schema"
+    ],
+    "expected_outputs": [
+      "classification_map",
+      "classifier_diagnostics",
+      "overlap_and_unclassified_stats"
+    ],
+    "supported_backends": [
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "ENVI_IDL_Bridge:MaximumLikelihood_and_Parallelepiped",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "支持通过 ENVI Task 或 IDL 批处理桥接执行经典最大似然与平行六面体分类。"
+      },
+      {
+        "software": "MATLAB",
+        "version_scope": "exact:R2022a",
+        "required_licenses": [
+          "MATLAB"
+        ],
+        "adapter_entrypoint": "methods.classification:matlab_base_supervised",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "使用基础矩阵求逆/Cholesky判别函数与显式多重落入消歧策略实现。"
+      },
+      {
+        "software": "ArcGISPro",
+        "version_scope": ">=3.6,<3.7",
+        "required_licenses": [
+          "ArcGISPro",
+          "SpatialAnalyst"
+        ],
+        "adapter_entrypoint": "arcpy.sa:MLClassify",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ArcGIS Pro Spatial Analyst 提供 MLClassify 最大似然分类。"
+      },
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "methods.classification",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "纯 Python 确定性最大似然与支持 3 种 overlap_policy 的平行六面体实现。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-CLASS-MLC-001",
+      "CHK-CLASS-PP-001",
+      "CHK-CLASS-MAP-001"
+    ],
+    "fallback_policy": "当类内样本数不足或协方差矩阵接近奇异时，自动启用 ridge_epsilon 正则化并记录告警；平行六面体严禁无声明顺序覆盖。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "postprocess-and-evaluate",
+    "stage_order": 7,
+    "title_zh": "分类后处理（Majority/Sieve/Clump）与独立精度验证",
+    "summary": "执行 Majority 滤波、Clump 形态学聚类、Sieve 小斑块筛除及 Clump+Sieve 组合分支，监测细长水体损失告警，并在统一 semantic_id 空间计算 C x (C+1) 混淆矩阵、PA/UA/OA/Kappa 及矢量栅格一致性。",
+    "entry_module": "methods.postprocess",
+    "required_inputs": [
+      "classification_map",
+      "validation_samples",
+      "postprocess_branches",
+      "class_schema"
+    ],
+    "expected_outputs": [
+      "postprocessed_maps",
+      "branch_comparison_metrics",
+      "water_loss_warnings",
+      "confusion_matrix_report"
+    ],
+    "supported_backends": [
+      {
+        "software": "ENVI",
+        "version_scope": ">=5.6,<5.7",
+        "required_licenses": [
+          "ENVI"
+        ],
+        "adapter_entrypoint": "ENVITask:ClassificationClumping/ClassificationSieving",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "ENVI 5.6 原生提供 ClassificationClumping、ClassificationSieving、ClassificationMajorityAnalysis。"
+      },
+      {
+        "software": "ArcGISPro",
+        "version_scope": ">=3.6,<3.7",
+        "required_licenses": [
+          "ArcGISPro",
+          "SpatialAnalyst"
+        ],
+        "adapter_entrypoint": "arcpy.sa:MajorityFilter/RegionGroup/Nibble/RasterToPolygon",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "支持 MajorityFilter、RegionGroup+SetNull+Nibble 后处理及 RasterToPolygon 矢量化闭环。"
+      },
+      {
+        "software": "MATLAB",
+        "version_scope": "exact:R2022a",
+        "required_licenses": [
+          "MATLAB"
+        ],
+        "adapter_entrypoint": "methods.postprocess:matlab_base_postprocess",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "本机无 Image Processing Toolbox，采用基础矩阵滑窗与 BFS 连通域算法，输出必须标注为 approximate_postprocess。"
+      },
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "methods.postprocess",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "纯 Python Majority、形态学 Clump、4/8 邻域连通域 Sieve 及 verification.classification_eval 独立评估器。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-POST-MODE-001",
+      "CHK-POST-WATER-LOSS-001",
+      "CHK-EVAL-MATRIX-001",
+      "CHK-EVAL-PA-UA-001",
+      "CHK-EVAL-VEC-ROUNDTRIP-001"
+    ],
+    "fallback_policy": "当使用非 ENVI 原生算子执行 Clump/Sieve 时，强制标记 implementation_kind='approximate_postprocess'；当水体像元损失超过阈值时自动触发告警并推荐使用 Sieve 或小核参数。",
+    "author_role": "gemini_antigravity"
+  },
+  {
+    "schema_revision": "0.1.0",
+    "skill_id": "deliver-and-learn",
+    "stage_order": 8,
+    "title_zh": "证据绑定报告生成、双签归档与经验规则晋升",
+    "summary": "基于冻结的运行包 manifest 生成实验报告（DOCX/PDF），执行表格列序语义校验、API/GUI 诚实措辞审计、截图 SHA256 核验，并将新发现的异常或修复提炼为候选经验卡（candidate experience）。",
+    "entry_module": "reports.report_builder:build_experiment_docx",
+    "required_inputs": [
+      "frozen_run_manifest",
+      "report_payload",
+      "verification_results"
+    ],
+    "expected_outputs": [
+      "verified_docx_report",
+      "pdf_verification_summary",
+      "candidate_experience_records",
+      "handoff_bundle"
+    ],
+    "supported_backends": [
+      {
+        "software": "PythonReference",
+        "version_scope": ">=3.11",
+        "required_licenses": [],
+        "adapter_entrypoint": "reports.report_builder:build_experiment_docx",
+        "verification_status": "pending_local_tool_verification",
+        "notes": "通过 python-docx 与 pypdf 生成并校验报告产物，结合 contracts.validate 生成交接包。"
+      }
+    ],
+    "verification_check_ids": [
+      "CHK-EVIDENCE-MANIFEST-001",
+      "CHK-SCREENSHOT-ID-001",
+      "CHK-REPORT-HONESTY-001",
+      "CHK-REPORT-TABLE-COL-001",
+      "CHK-EVAL-KIND-001",
+      "CHK-EXP-PROMOTION-GATE-001"
+    ],
+    "fallback_policy": "任何报告校验项（列错位、GUI伪造措辞、CRS/定标越界、PA/UA顛倒）未通过时立即阻断报告导出；未获独立复核人签名前严禁将任务或经验卡状态标为已完成/已发布。",
+    "author_role": "gemini_antigravity"
+  }
+]

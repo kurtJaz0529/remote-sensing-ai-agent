@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rsagent:skill:0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_revision": {
+      "const": "0.1.0"
+    },
+    "skill_id": {
+      "type": "string",
+      "enum": [
+        "task-intake",
+        "dataset-audit",
+        "raster-preprocess",
+        "spectral-transform",
+        "unsupervised-classification",
+        "supervised-classification",
+        "postprocess-and-evaluate",
+        "deliver-and-learn"
+      ]
+    },
+    "stage_order": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "title_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "expected_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "supported_backends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "software": {
+            "enum": [
+              "ENVI",
+              "MATLAB",
+              "ArcGISPro",
+              "PythonReference"
+            ]
+          },
+          "version_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_licenses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "adapter_entrypoint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verification_status": {
+            "enum": [
+              "pending_local_tool_verification",
+              "verified_local_probe",
+              "verified_end_to_end"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "software",
+          "version_scope",
+          "required_licenses",
+          "adapter_entrypoint",
+          "verification_status",
+          "notes"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "verification_check_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "fallback_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author_role": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_revision",
+    "skill_id",
+    "stage_order",
+    "title_zh",
+    "summary",
+    "entry_module",
+    "required_inputs",
+    "expected_outputs",
+    "supported_backends",
+    "verification_check_ids",
+    "fallback_policy",
+    "author_role"
+  ],
+  "additionalProperties": false
+}
